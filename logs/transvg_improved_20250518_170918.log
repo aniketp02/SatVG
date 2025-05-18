@@ -1,0 +1,252 @@
+2025-05-18 17:09:20,463 - transvg_improved_20250518_170918 - INFO - Initialized logger: transvg_improved_20250518_170918
+2025-05-18 17:09:20,463 - transvg_improved_20250518_170918 - INFO - Configuration: {
+  "data_root": "/home/pokle/Trans-VG/visual_grounding/dior-rsvg",
+  "image_size": 224,
+  "max_text_len": 40,
+  "hidden_dim": 256,
+  "bert_model": "bert-base-uncased",
+  "dropout": 0.1,
+  "num_heads": 8,
+  "num_encoder_layers": 6,
+  "cross_layers": 4,
+  "dim_feedforward": 2048,
+  "mlp_hidden_dim": 256,
+  "backbone": "resnet50",
+  "pretrained": true,
+  "freeze_backbone": true,
+  "partial_freeze_vision": true,
+  "freeze_linguistic": true,
+  "partial_freeze_linguistic": true,
+  "batch_size": 32,
+  "num_workers": 4,
+  "learning_rate": 0.0001,
+  "weight_decay": 0.0001,
+  "num_epochs": 100,
+  "lr": 0.001,
+  "lr_bert": 2e-05,
+  "lr_drop": 70,
+  "gradient_clip_val": 1.0,
+  "output_dir": "output",
+  "epochs": 5
+}
+2025-05-18 17:09:20,464 - transvg_improved_20250518_170918 - INFO - Using device: cuda:1
+2025-05-18 17:09:20,464 - transvg_improved_20250518_170918 - INFO - Both backbones will be frozen (vision: partially) (linguistic: partially)
+2025-05-18 17:09:20,464 - transvg_improved_20250518_170918 - INFO - Building data loaders...
+2025-05-18 17:09:22,334 - transvg_improved_20250518_170918 - INFO - Train dataset size: 27133
+2025-05-18 17:09:22,334 - transvg_improved_20250518_170918 - INFO - Val dataset size: 3765
+2025-05-18 17:09:22,334 - transvg_improved_20250518_170918 - INFO - Test dataset size: 7422
+2025-05-18 17:09:22,334 - transvg_improved_20250518_170918 - INFO - Building model...
+2025-05-18 17:09:23,989 - transvg_improved_20250518_170918 - INFO - Starting training...
+2025-05-18 17:09:23,989 - transvg_improved_20250518_170918 - INFO - Epoch 0/5
+2025-05-18 17:09:26,142 - transvg_improved_20250518_170918 - INFO - Epoch 0, Batch 0/848, Loss: 27.3550
+2025-05-18 17:09:26,143 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 4.7607 | giou_loss: 1.7758 | total_loss: 27.3550
+2025-05-18 17:09:38,452 - transvg_improved_20250518_170918 - INFO - Epoch 0, Batch 50/848, Loss: 17.1412
+2025-05-18 17:09:38,453 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 2.9311 | giou_loss: 1.2429 | total_loss: 17.1412
+2025-05-18 17:09:51,601 - transvg_improved_20250518_170918 - INFO - Epoch 0, Batch 100/848, Loss: 17.3058
+2025-05-18 17:09:51,601 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 2.9381 | giou_loss: 1.3078 | total_loss: 17.3058
+2025-05-18 17:10:04,697 - transvg_improved_20250518_170918 - INFO - Epoch 0, Batch 150/848, Loss: 16.5231
+2025-05-18 17:10:04,698 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 2.8238 | giou_loss: 1.2020 | total_loss: 16.5231
+2025-05-18 17:10:17,798 - transvg_improved_20250518_170918 - INFO - Epoch 0, Batch 200/848, Loss: 16.7434
+2025-05-18 17:10:17,798 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 2.8598 | giou_loss: 1.2222 | total_loss: 16.7434
+2025-05-18 17:10:30,965 - transvg_improved_20250518_170918 - INFO - Epoch 0, Batch 250/848, Loss: 16.2738
+2025-05-18 17:10:30,966 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 2.7621 | giou_loss: 1.2316 | total_loss: 16.2738
+2025-05-18 17:10:44,091 - transvg_improved_20250518_170918 - INFO - Epoch 0, Batch 300/848, Loss: 16.1240
+2025-05-18 17:10:44,091 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 2.7451 | giou_loss: 1.1992 | total_loss: 16.1240
+2025-05-18 17:10:57,313 - transvg_improved_20250518_170918 - INFO - Epoch 0, Batch 350/848, Loss: 19.2366
+2025-05-18 17:10:57,313 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 3.3171 | giou_loss: 1.3255 | total_loss: 19.2366
+2025-05-18 17:11:10,609 - transvg_improved_20250518_170918 - INFO - Epoch 0, Batch 400/848, Loss: 15.3198
+2025-05-18 17:11:10,609 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 2.5958 | giou_loss: 1.1703 | total_loss: 15.3198
+2025-05-18 17:11:23,945 - transvg_improved_20250518_170918 - INFO - Epoch 0, Batch 450/848, Loss: 18.8704
+2025-05-18 17:11:23,945 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 3.2436 | giou_loss: 1.3262 | total_loss: 18.8704
+2025-05-18 17:11:37,188 - transvg_improved_20250518_170918 - INFO - Epoch 0, Batch 500/848, Loss: 15.3608
+2025-05-18 17:11:37,188 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 2.5936 | giou_loss: 1.1964 | total_loss: 15.3608
+2025-05-18 17:11:50,492 - transvg_improved_20250518_170918 - INFO - Epoch 0, Batch 550/848, Loss: 18.7142
+2025-05-18 17:11:50,493 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 3.2090 | giou_loss: 1.3346 | total_loss: 18.7142
+2025-05-18 17:12:03,785 - transvg_improved_20250518_170918 - INFO - Epoch 0, Batch 600/848, Loss: 18.1855
+2025-05-18 17:12:03,786 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 3.1197 | giou_loss: 1.2935 | total_loss: 18.1855
+2025-05-18 17:12:17,031 - transvg_improved_20250518_170918 - INFO - Epoch 0, Batch 650/848, Loss: 16.5551
+2025-05-18 17:12:17,031 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 2.8294 | giou_loss: 1.2041 | total_loss: 16.5551
+2025-05-18 17:12:30,429 - transvg_improved_20250518_170918 - INFO - Epoch 0, Batch 700/848, Loss: 17.2031
+2025-05-18 17:12:30,429 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 2.9381 | giou_loss: 1.2564 | total_loss: 17.2031
+2025-05-18 17:12:43,715 - transvg_improved_20250518_170918 - INFO - Epoch 0, Batch 750/848, Loss: 18.6011
+2025-05-18 17:12:43,715 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 3.2054 | giou_loss: 1.2872 | total_loss: 18.6011
+2025-05-18 17:12:56,970 - transvg_improved_20250518_170918 - INFO - Epoch 0, Batch 800/848, Loss: 18.8358
+2025-05-18 17:12:56,970 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 3.2419 | giou_loss: 1.3131 | total_loss: 18.8358
+2025-05-18 17:13:09,488 - transvg_improved_20250518_170918 - INFO - Train Epoch 0, Loss: 17.5571
+2025-05-18 17:13:26,138 - transvg_improved_20250518_170918 - INFO - Pred box sample: [224.0, 224.0, 448.0, 448.0]
+2025-05-18 17:13:26,138 - transvg_improved_20250518_170918 - INFO - Target box sample: [207.0, 198.0, 287.0, 283.0]
+2025-05-18 17:13:26,213 - transvg_improved_20250518_170918 - INFO - Validation Epoch 0, Loss: 17.6660
+2025-05-18 17:13:26,213 - transvg_improved_20250518_170918 - INFO - Val metrics: Acc@0.25: 0.1033 | Acc@0.5: 0.0066 | Acc@0.75: 0.0003 | mIoU: 0.0714 | medianIoU: 0.0000 | mae_x1: 175.1535 | mae_y1: 169.7211 | mae_x2: 169.6537 | mae_y2: 163.3950 | center_x_error: 156.5242 | center_y_error: 150.1060 | width_error: 3.2319 | height_error: 3.1359 | loss: 17.6660
+2025-05-18 17:13:26,855 - transvg_improved_20250518_170918 - INFO - Saved model checkpoint to /home/pokle/Trans-VG/visual_grounding/checkpoints/transvg_improved_20250518_170918_epoch0.pth
+2025-05-18 17:13:26,855 - transvg_improved_20250518_170918 - INFO - New best model! Acc@0.5: 0.0066
+2025-05-18 17:13:26,855 - transvg_improved_20250518_170918 - INFO - Epoch 1/5
+2025-05-18 17:13:27,847 - transvg_improved_20250518_170918 - INFO - Epoch 1, Batch 0/848, Loss: 18.0470
+2025-05-18 17:13:27,847 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 3.1090 | giou_loss: 1.2511 | total_loss: 18.0470
+2025-05-18 17:13:41,262 - transvg_improved_20250518_170918 - INFO - Epoch 1, Batch 50/848, Loss: 18.5826
+2025-05-18 17:13:41,262 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 3.1956 | giou_loss: 1.3023 | total_loss: 18.5826
+2025-05-18 17:13:54,691 - transvg_improved_20250518_170918 - INFO - Epoch 1, Batch 100/848, Loss: 18.9677
+2025-05-18 17:13:54,691 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 3.2599 | giou_loss: 1.3341 | total_loss: 18.9677
+2025-05-18 17:14:08,175 - transvg_improved_20250518_170918 - INFO - Epoch 1, Batch 150/848, Loss: 18.4286
+2025-05-18 17:14:08,176 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 3.1744 | giou_loss: 1.2783 | total_loss: 18.4286
+2025-05-18 17:14:21,574 - transvg_improved_20250518_170918 - INFO - Epoch 1, Batch 200/848, Loss: 19.1354
+2025-05-18 17:14:21,574 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 3.2991 | giou_loss: 1.3199 | total_loss: 19.1354
+2025-05-18 17:14:35,092 - transvg_improved_20250518_170918 - INFO - Epoch 1, Batch 250/848, Loss: 16.9178
+2025-05-18 17:14:35,092 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 2.8689 | giou_loss: 1.2867 | total_loss: 16.9178
+2025-05-18 17:14:48,660 - transvg_improved_20250518_170918 - INFO - Epoch 1, Batch 300/848, Loss: 17.8613
+2025-05-18 17:14:48,660 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 3.0619 | giou_loss: 1.2758 | total_loss: 17.8613
+2025-05-18 17:15:02,210 - transvg_improved_20250518_170918 - INFO - Epoch 1, Batch 350/848, Loss: 17.1425
+2025-05-18 17:15:02,210 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 2.9393 | giou_loss: 1.2230 | total_loss: 17.1425
+2025-05-18 17:15:15,842 - transvg_improved_20250518_170918 - INFO - Epoch 1, Batch 400/848, Loss: 18.1340
+2025-05-18 17:15:15,842 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 3.1063 | giou_loss: 1.3012 | total_loss: 18.1340
+2025-05-18 17:15:29,480 - transvg_improved_20250518_170918 - INFO - Epoch 1, Batch 450/848, Loss: 18.3071
+2025-05-18 17:15:29,481 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 3.1554 | giou_loss: 1.2650 | total_loss: 18.3071
+2025-05-18 17:15:43,011 - transvg_improved_20250518_170918 - INFO - Epoch 1, Batch 500/848, Loss: 14.7934
+2025-05-18 17:15:43,011 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 2.5067 | giou_loss: 1.1300 | total_loss: 14.7934
+2025-05-18 17:15:56,591 - transvg_improved_20250518_170918 - INFO - Epoch 1, Batch 550/848, Loss: 18.1898
+2025-05-18 17:15:56,591 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 3.1187 | giou_loss: 1.2981 | total_loss: 18.1898
+2025-05-18 17:16:10,184 - transvg_improved_20250518_170918 - INFO - Epoch 1, Batch 600/848, Loss: 16.2680
+2025-05-18 17:16:10,184 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 2.7684 | giou_loss: 1.2130 | total_loss: 16.2680
+2025-05-18 17:16:23,832 - transvg_improved_20250518_170918 - INFO - Epoch 1, Batch 650/848, Loss: 16.6792
+2025-05-18 17:16:23,833 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 2.8615 | giou_loss: 1.1859 | total_loss: 16.6792
+2025-05-18 17:16:37,421 - transvg_improved_20250518_170918 - INFO - Epoch 1, Batch 700/848, Loss: 16.2925
+2025-05-18 17:16:37,421 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 2.7648 | giou_loss: 1.2343 | total_loss: 16.2925
+2025-05-18 17:16:51,007 - transvg_improved_20250518_170918 - INFO - Epoch 1, Batch 750/848, Loss: 15.6457
+2025-05-18 17:16:51,008 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 2.6546 | giou_loss: 1.1864 | total_loss: 15.6457
+2025-05-18 17:17:04,653 - transvg_improved_20250518_170918 - INFO - Epoch 1, Batch 800/848, Loss: 17.3762
+2025-05-18 17:17:04,653 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 2.9805 | giou_loss: 1.2369 | total_loss: 17.3762
+2025-05-18 17:17:17,368 - transvg_improved_20250518_170918 - INFO - Train Epoch 1, Loss: 17.4943
+2025-05-18 17:17:33,467 - transvg_improved_20250518_170918 - INFO - Pred box sample: [224.0, 224.0, 448.0, 448.0]
+2025-05-18 17:17:33,468 - transvg_improved_20250518_170918 - INFO - Target box sample: [207.0, 198.0, 287.0, 283.0]
+2025-05-18 17:17:33,558 - transvg_improved_20250518_170918 - INFO - Validation Epoch 1, Loss: 17.6660
+2025-05-18 17:17:33,558 - transvg_improved_20250518_170918 - INFO - Val metrics: Acc@0.25: 0.1033 | Acc@0.5: 0.0066 | Acc@0.75: 0.0003 | mIoU: 0.0714 | medianIoU: 0.0000 | mae_x1: 175.1535 | mae_y1: 169.7211 | mae_x2: 169.6537 | mae_y2: 163.3950 | center_x_error: 156.5242 | center_y_error: 150.1060 | width_error: 3.2319 | height_error: 3.1359 | loss: 17.6660
+2025-05-18 17:17:34,206 - transvg_improved_20250518_170918 - INFO - Saved model checkpoint to /home/pokle/Trans-VG/visual_grounding/checkpoints/transvg_improved_20250518_170918_epoch1.pth
+2025-05-18 17:17:34,207 - transvg_improved_20250518_170918 - INFO - Epoch 2/5
+2025-05-18 17:17:35,198 - transvg_improved_20250518_170918 - INFO - Epoch 2, Batch 0/848, Loss: 15.9191
+2025-05-18 17:17:35,198 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 2.7035 | giou_loss: 1.2007 | total_loss: 15.9191
+2025-05-18 17:17:49,362 - transvg_improved_20250518_170918 - INFO - Epoch 2, Batch 50/848, Loss: 17.2379
+2025-05-18 17:17:49,362 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 2.9287 | giou_loss: 1.2971 | total_loss: 17.2379
+2025-05-18 17:18:03,488 - transvg_improved_20250518_170918 - INFO - Epoch 2, Batch 100/848, Loss: 15.5767
+2025-05-18 17:18:03,488 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 2.6602 | giou_loss: 1.1380 | total_loss: 15.5767
+2025-05-18 17:18:17,624 - transvg_improved_20250518_170918 - INFO - Epoch 2, Batch 150/848, Loss: 16.3127
+2025-05-18 17:18:17,624 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 2.7838 | giou_loss: 1.1970 | total_loss: 16.3127
+2025-05-18 17:18:31,755 - transvg_improved_20250518_170918 - INFO - Epoch 2, Batch 200/848, Loss: 19.2658
+2025-05-18 17:18:31,755 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 3.3140 | giou_loss: 1.3478 | total_loss: 19.2658
+2025-05-18 17:18:45,874 - transvg_improved_20250518_170918 - INFO - Epoch 2, Batch 250/848, Loss: 17.0750
+2025-05-18 17:18:45,874 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 2.9104 | giou_loss: 1.2614 | total_loss: 17.0750
+2025-05-18 17:19:00,000 - transvg_improved_20250518_170918 - INFO - Epoch 2, Batch 300/848, Loss: 17.2075
+2025-05-18 17:19:00,000 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 2.9216 | giou_loss: 1.2998 | total_loss: 17.2075
+2025-05-18 17:19:14,074 - transvg_improved_20250518_170918 - INFO - Epoch 2, Batch 350/848, Loss: 18.4286
+2025-05-18 17:19:14,075 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 3.1600 | giou_loss: 1.3143 | total_loss: 18.4286
+2025-05-18 17:19:28,185 - transvg_improved_20250518_170918 - INFO - Epoch 2, Batch 400/848, Loss: 16.5487
+2025-05-18 17:19:28,185 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 2.8259 | giou_loss: 1.2096 | total_loss: 16.5487
+2025-05-18 17:19:42,272 - transvg_improved_20250518_170918 - INFO - Epoch 2, Batch 450/848, Loss: 17.3262
+2025-05-18 17:19:42,272 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 2.9632 | giou_loss: 1.2552 | total_loss: 17.3262
+2025-05-18 17:19:56,367 - transvg_improved_20250518_170918 - INFO - Epoch 2, Batch 500/848, Loss: 18.7140
+2025-05-18 17:19:56,367 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 3.2049 | giou_loss: 1.3447 | total_loss: 18.7140
+2025-05-18 17:20:10,451 - transvg_improved_20250518_170918 - INFO - Epoch 2, Batch 550/848, Loss: 19.2249
+2025-05-18 17:20:10,451 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 3.3270 | giou_loss: 1.2949 | total_loss: 19.2249
+2025-05-18 17:20:24,560 - transvg_improved_20250518_170918 - INFO - Epoch 2, Batch 600/848, Loss: 17.0931
+2025-05-18 17:20:24,561 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 2.9304 | giou_loss: 1.2206 | total_loss: 17.0931
+2025-05-18 17:20:38,625 - transvg_improved_20250518_170918 - INFO - Epoch 2, Batch 650/848, Loss: 17.9408
+2025-05-18 17:20:38,626 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 3.0864 | giou_loss: 1.2545 | total_loss: 17.9408
+2025-05-18 17:20:52,637 - transvg_improved_20250518_170918 - INFO - Epoch 2, Batch 700/848, Loss: 17.6942
+2025-05-18 17:20:52,637 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 3.0287 | giou_loss: 1.2753 | total_loss: 17.6942
+2025-05-18 17:21:06,678 - transvg_improved_20250518_170918 - INFO - Epoch 2, Batch 750/848, Loss: 18.5239
+2025-05-18 17:21:06,678 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 3.1837 | giou_loss: 1.3026 | total_loss: 18.5239
+2025-05-18 17:21:20,735 - transvg_improved_20250518_170918 - INFO - Epoch 2, Batch 800/848, Loss: 17.4904
+2025-05-18 17:21:20,735 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 2.9884 | giou_loss: 1.2741 | total_loss: 17.4904
+2025-05-18 17:21:33,914 - transvg_improved_20250518_170918 - INFO - Train Epoch 2, Loss: 17.4943
+2025-05-18 17:21:49,989 - transvg_improved_20250518_170918 - INFO - Pred box sample: [224.0, 224.0, 448.0, 448.0]
+2025-05-18 17:21:49,990 - transvg_improved_20250518_170918 - INFO - Target box sample: [207.0, 198.0, 287.0, 283.0]
+2025-05-18 17:21:50,071 - transvg_improved_20250518_170918 - INFO - Validation Epoch 2, Loss: 17.6660
+2025-05-18 17:21:50,071 - transvg_improved_20250518_170918 - INFO - Val metrics: Acc@0.25: 0.1033 | Acc@0.5: 0.0066 | Acc@0.75: 0.0003 | mIoU: 0.0714 | medianIoU: 0.0000 | mae_x1: 175.1535 | mae_y1: 169.7211 | mae_x2: 169.6537 | mae_y2: 163.3950 | center_x_error: 156.5242 | center_y_error: 150.1060 | width_error: 3.2319 | height_error: 3.1359 | loss: 17.6660
+2025-05-18 17:21:50,700 - transvg_improved_20250518_170918 - INFO - Saved model checkpoint to /home/pokle/Trans-VG/visual_grounding/checkpoints/transvg_improved_20250518_170918_epoch2.pth
+2025-05-18 17:21:50,701 - transvg_improved_20250518_170918 - INFO - Epoch 3/5
+2025-05-18 17:21:51,694 - transvg_improved_20250518_170918 - INFO - Epoch 3, Batch 0/848, Loss: 18.9481
+2025-05-18 17:21:51,694 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 3.2482 | giou_loss: 1.3536 | total_loss: 18.9481
+2025-05-18 17:22:05,720 - transvg_improved_20250518_170918 - INFO - Epoch 3, Batch 50/848, Loss: 16.8299
+2025-05-18 17:22:05,721 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 2.8682 | giou_loss: 1.2445 | total_loss: 16.8299
+2025-05-18 17:22:19,820 - transvg_improved_20250518_170918 - INFO - Epoch 3, Batch 100/848, Loss: 17.2145
+2025-05-18 17:22:19,821 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 2.9519 | giou_loss: 1.2276 | total_loss: 17.2145
+2025-05-18 17:22:33,896 - transvg_improved_20250518_170918 - INFO - Epoch 3, Batch 150/848, Loss: 17.9239
+2025-05-18 17:22:33,897 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 3.0663 | giou_loss: 1.2963 | total_loss: 17.9239
+2025-05-18 17:22:48,086 - transvg_improved_20250518_170918 - INFO - Epoch 3, Batch 200/848, Loss: 17.4039
+2025-05-18 17:22:48,086 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 2.9813 | giou_loss: 1.2487 | total_loss: 17.4039
+2025-05-18 17:23:02,327 - transvg_improved_20250518_170918 - INFO - Epoch 3, Batch 250/848, Loss: 19.4375
+2025-05-18 17:23:02,328 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 3.3564 | giou_loss: 1.3277 | total_loss: 19.4375
+2025-05-18 17:23:16,656 - transvg_improved_20250518_170918 - INFO - Epoch 3, Batch 300/848, Loss: 18.4116
+2025-05-18 17:23:16,656 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 3.1755 | giou_loss: 1.2671 | total_loss: 18.4116
+2025-05-18 17:23:30,979 - transvg_improved_20250518_170918 - INFO - Epoch 3, Batch 350/848, Loss: 14.4577
+2025-05-18 17:23:30,979 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 2.4374 | giou_loss: 1.1355 | total_loss: 14.4577
+2025-05-18 17:23:45,132 - transvg_improved_20250518_170918 - INFO - Epoch 3, Batch 400/848, Loss: 18.0017
+2025-05-18 17:23:45,133 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 3.0823 | giou_loss: 1.2951 | total_loss: 18.0017
+2025-05-18 17:23:59,264 - transvg_improved_20250518_170918 - INFO - Epoch 3, Batch 450/848, Loss: 17.1342
+2025-05-18 17:23:59,265 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 2.9254 | giou_loss: 1.2537 | total_loss: 17.1342
+2025-05-18 17:24:13,487 - transvg_improved_20250518_170918 - INFO - Epoch 3, Batch 500/848, Loss: 15.7857
+2025-05-18 17:24:13,487 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 2.6643 | giou_loss: 1.2320 | total_loss: 15.7857
+2025-05-18 17:24:27,638 - transvg_improved_20250518_170918 - INFO - Epoch 3, Batch 550/848, Loss: 17.0943
+2025-05-18 17:24:27,638 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 2.9191 | giou_loss: 1.2494 | total_loss: 17.0943
+2025-05-18 17:24:41,757 - transvg_improved_20250518_170918 - INFO - Epoch 3, Batch 600/848, Loss: 18.2100
+2025-05-18 17:24:41,758 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 3.1214 | giou_loss: 1.3016 | total_loss: 18.2100
+2025-05-18 17:24:56,132 - transvg_improved_20250518_170918 - INFO - Epoch 3, Batch 650/848, Loss: 17.8878
+2025-05-18 17:24:56,133 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 3.0763 | giou_loss: 1.2531 | total_loss: 17.8878
+2025-05-18 17:25:10,391 - transvg_improved_20250518_170918 - INFO - Epoch 3, Batch 700/848, Loss: 16.6839
+2025-05-18 17:25:10,391 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 2.8577 | giou_loss: 1.1977 | total_loss: 16.6839
+2025-05-18 17:25:24,639 - transvg_improved_20250518_170918 - INFO - Epoch 3, Batch 750/848, Loss: 20.2788
+2025-05-18 17:25:24,639 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 3.4980 | giou_loss: 1.3943 | total_loss: 20.2788
+2025-05-18 17:25:38,573 - transvg_improved_20250518_170918 - INFO - Epoch 3, Batch 800/848, Loss: 17.8825
+2025-05-18 17:25:38,573 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 3.0625 | giou_loss: 1.2850 | total_loss: 17.8825
+2025-05-18 17:25:51,827 - transvg_improved_20250518_170918 - INFO - Train Epoch 3, Loss: 17.4943
+2025-05-18 17:26:08,605 - transvg_improved_20250518_170918 - INFO - Pred box sample: [224.0, 224.0, 448.0, 448.0]
+2025-05-18 17:26:08,606 - transvg_improved_20250518_170918 - INFO - Target box sample: [207.0, 198.0, 287.0, 283.0]
+2025-05-18 17:26:08,689 - transvg_improved_20250518_170918 - INFO - Validation Epoch 3, Loss: 17.6660
+2025-05-18 17:26:08,689 - transvg_improved_20250518_170918 - INFO - Val metrics: Acc@0.25: 0.1033 | Acc@0.5: 0.0066 | Acc@0.75: 0.0003 | mIoU: 0.0714 | medianIoU: 0.0000 | mae_x1: 175.1535 | mae_y1: 169.7211 | mae_x2: 169.6537 | mae_y2: 163.3950 | center_x_error: 156.5242 | center_y_error: 150.1060 | width_error: 3.2319 | height_error: 3.1359 | loss: 17.6660
+2025-05-18 17:26:09,443 - transvg_improved_20250518_170918 - INFO - Saved model checkpoint to /home/pokle/Trans-VG/visual_grounding/checkpoints/transvg_improved_20250518_170918_epoch3.pth
+2025-05-18 17:26:09,444 - transvg_improved_20250518_170918 - INFO - Epoch 4/5
+2025-05-18 17:26:10,452 - transvg_improved_20250518_170918 - INFO - Epoch 4, Batch 0/848, Loss: 14.5075
+2025-05-18 17:26:10,453 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 2.4258 | giou_loss: 1.1893 | total_loss: 14.5075
+2025-05-18 17:26:24,727 - transvg_improved_20250518_170918 - INFO - Epoch 4, Batch 50/848, Loss: 18.2702
+2025-05-18 17:26:24,728 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 3.1327 | giou_loss: 1.3034 | total_loss: 18.2702
+2025-05-18 17:26:38,943 - transvg_improved_20250518_170918 - INFO - Epoch 4, Batch 100/848, Loss: 16.9245
+2025-05-18 17:26:38,943 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 2.9069 | giou_loss: 1.1949 | total_loss: 16.9245
+2025-05-18 17:26:53,042 - transvg_improved_20250518_170918 - INFO - Epoch 4, Batch 150/848, Loss: 16.3761
+2025-05-18 17:26:53,043 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 2.8202 | giou_loss: 1.1376 | total_loss: 16.3761
+2025-05-18 17:27:07,176 - transvg_improved_20250518_170918 - INFO - Epoch 4, Batch 200/848, Loss: 16.8229
+2025-05-18 17:27:07,176 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 2.8676 | giou_loss: 1.2424 | total_loss: 16.8229
+2025-05-18 17:27:21,309 - transvg_improved_20250518_170918 - INFO - Epoch 4, Batch 250/848, Loss: 18.7184
+2025-05-18 17:27:21,309 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 3.2405 | giou_loss: 1.2579 | total_loss: 18.7184
+2025-05-18 17:27:35,420 - transvg_improved_20250518_170918 - INFO - Epoch 4, Batch 300/848, Loss: 20.0434
+2025-05-18 17:27:35,420 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 3.4400 | giou_loss: 1.4217 | total_loss: 20.0434
+2025-05-18 17:27:49,576 - transvg_improved_20250518_170918 - INFO - Epoch 4, Batch 350/848, Loss: 17.0635
+2025-05-18 17:27:49,576 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 2.9205 | giou_loss: 1.2305 | total_loss: 17.0635
+2025-05-18 17:28:03,727 - transvg_improved_20250518_170918 - INFO - Epoch 4, Batch 400/848, Loss: 18.8105
+2025-05-18 17:28:03,727 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 3.2570 | giou_loss: 1.2628 | total_loss: 18.8105
+2025-05-18 17:28:17,801 - transvg_improved_20250518_170918 - INFO - Epoch 4, Batch 450/848, Loss: 16.9396
+2025-05-18 17:28:17,801 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 2.8980 | giou_loss: 1.2247 | total_loss: 16.9396
+2025-05-18 17:28:31,956 - transvg_improved_20250518_170918 - INFO - Epoch 4, Batch 500/848, Loss: 16.9256
+2025-05-18 17:28:31,956 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 2.8924 | giou_loss: 1.2317 | total_loss: 16.9256
+2025-05-18 17:28:46,181 - transvg_improved_20250518_170918 - INFO - Epoch 4, Batch 550/848, Loss: 16.1277
+2025-05-18 17:28:46,181 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 2.7412 | giou_loss: 1.2108 | total_loss: 16.1277
+2025-05-18 17:29:00,464 - transvg_improved_20250518_170918 - INFO - Epoch 4, Batch 600/848, Loss: 17.7150
+2025-05-18 17:29:00,464 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 3.0350 | giou_loss: 1.2700 | total_loss: 17.7150
+2025-05-18 17:29:14,584 - transvg_improved_20250518_170918 - INFO - Epoch 4, Batch 650/848, Loss: 16.5818
+2025-05-18 17:29:14,584 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 2.8164 | giou_loss: 1.2499 | total_loss: 16.5818
+2025-05-18 17:29:28,797 - transvg_improved_20250518_170918 - INFO - Epoch 4, Batch 700/848, Loss: 17.8065
+2025-05-18 17:29:28,797 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 3.0399 | giou_loss: 1.3035 | total_loss: 17.8065
+2025-05-18 17:29:43,119 - transvg_improved_20250518_170918 - INFO - Epoch 4, Batch 750/848, Loss: 16.8074
+2025-05-18 17:29:43,119 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 2.8583 | giou_loss: 1.2580 | total_loss: 16.8074
+2025-05-18 17:29:57,468 - transvg_improved_20250518_170918 - INFO - Epoch 4, Batch 800/848, Loss: 17.1229
+2025-05-18 17:29:57,468 - transvg_improved_20250518_170918 - INFO - Train metrics: l1_loss: 2.9135 | giou_loss: 1.2777 | total_loss: 17.1229
+2025-05-18 17:30:10,927 - transvg_improved_20250518_170918 - INFO - Train Epoch 4, Loss: 17.4943
+2025-05-18 17:30:27,453 - transvg_improved_20250518_170918 - INFO - Pred box sample: [224.0, 224.0, 448.0, 448.0]
+2025-05-18 17:30:27,454 - transvg_improved_20250518_170918 - INFO - Target box sample: [207.0, 198.0, 287.0, 283.0]
+2025-05-18 17:30:27,535 - transvg_improved_20250518_170918 - INFO - Validation Epoch 4, Loss: 17.6660
+2025-05-18 17:30:27,535 - transvg_improved_20250518_170918 - INFO - Val metrics: Acc@0.25: 0.1033 | Acc@0.5: 0.0066 | Acc@0.75: 0.0003 | mIoU: 0.0714 | medianIoU: 0.0000 | mae_x1: 175.1535 | mae_y1: 169.7211 | mae_x2: 169.6537 | mae_y2: 163.3950 | center_x_error: 156.5242 | center_y_error: 150.1060 | width_error: 3.2319 | height_error: 3.1359 | loss: 17.6660
+2025-05-18 17:30:28,143 - transvg_improved_20250518_170918 - INFO - Saved model checkpoint to /home/pokle/Trans-VG/visual_grounding/checkpoints/transvg_improved_20250518_170918_epoch4.pth
+2025-05-18 17:30:28,144 - transvg_improved_20250518_170918 - INFO - Final evaluation on test set...
+2025-05-18 17:30:59,761 - transvg_improved_20250518_170918 - INFO - Pred box sample: [224.0, 224.0, 448.0, 448.0]
+2025-05-18 17:30:59,762 - transvg_improved_20250518_170918 - INFO - Target box sample: [133.0, 237.0, 684.0, 672.0]
+2025-05-18 17:30:59,896 - transvg_improved_20250518_170918 - INFO - Validation Epoch 5, Loss: 17.4719
+2025-05-18 17:30:59,896 - transvg_improved_20250518_170918 - INFO - Val metrics: Acc@0.25: 0.1095 | Acc@0.5: 0.0108 | Acc@0.75: 0.0005 | mIoU: 0.0758 | medianIoU: 0.0000 | mae_x1: 170.7338 | mae_y1: 166.1603 | mae_x2: 170.1781 | mae_y2: 163.0922 | center_x_error: 154.7792 | center_y_error: 148.5581 | width_error: 3.1298 | height_error: 3.1564 | loss: 17.4719
+2025-05-18 17:30:59,898 - transvg_improved_20250518_170918 - INFO - Test metrics: {'Acc@0.25': 0.1095392077607114, 'Acc@0.5': 0.010778765831312315, 'Acc@0.75': 0.0005389382915656157, 'mIoU': 0.07579220073899859, 'medianIoU': 0.0, 'mae_x1': 170.73376, 'mae_y1': 166.16034, 'mae_x2': 170.17812, 'mae_y2': 163.09216, 'center_x_error': 154.77917, 'center_y_error': 148.55807, 'width_error': 3.1298459, 'height_error': 3.156407, 'loss': 17.471923173068188}
+2025-05-18 17:30:59,898 - transvg_improved_20250518_170918 - INFO - Finished logging session

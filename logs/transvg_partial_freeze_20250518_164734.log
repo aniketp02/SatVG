@@ -1,0 +1,224 @@
+2025-05-18 16:47:37,016 - transvg_partial_freeze_20250518_164734 - INFO - Initialized logger: transvg_partial_freeze_20250518_164734
+2025-05-18 16:47:37,017 - transvg_partial_freeze_20250518_164734 - INFO - Configuration: {
+  "data_root": "/home/pokle/Trans-VG/visual_grounding/dior-rsvg",
+  "image_size": 224,
+  "max_text_len": 40,
+  "hidden_dim": 256,
+  "bert_model": "bert-base-uncased",
+  "dropout": 0.1,
+  "num_heads": 8,
+  "num_encoder_layers": 6,
+  "cross_layers": 8,
+  "dim_feedforward": 2048,
+  "mlp_hidden_dim": 256,
+  "backbone": "resnet50",
+  "pretrained": true,
+  "freeze_backbone": true,
+  "partial_freeze_vision": true,
+  "freeze_linguistic": true,
+  "partial_freeze_linguistic": true,
+  "batch_size": 32,
+  "num_workers": 4,
+  "learning_rate": 0.0001,
+  "weight_decay": 0.0001,
+  "num_epochs": 100,
+  "lr": 0.0005,
+  "lr_bert": 1e-05,
+  "lr_drop": 70,
+  "output_dir": "output",
+  "epochs": 5
+}
+2025-05-18 16:47:37,017 - transvg_partial_freeze_20250518_164734 - INFO - Using device: cuda:1
+2025-05-18 16:47:37,017 - transvg_partial_freeze_20250518_164734 - INFO - Both backbones will be frozen (vision: partially) (linguistic: partially)
+2025-05-18 16:47:37,018 - transvg_partial_freeze_20250518_164734 - INFO - Building data loaders...
+2025-05-18 16:47:38,176 - transvg_partial_freeze_20250518_164734 - INFO - Train dataset size: 27133
+2025-05-18 16:47:38,177 - transvg_partial_freeze_20250518_164734 - INFO - Val dataset size: 3765
+2025-05-18 16:47:38,177 - transvg_partial_freeze_20250518_164734 - INFO - Test dataset size: 7422
+2025-05-18 16:47:38,177 - transvg_partial_freeze_20250518_164734 - INFO - Building model...
+2025-05-18 16:47:39,559 - transvg_partial_freeze_20250518_164734 - INFO - Starting training...
+2025-05-18 16:47:39,559 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 0/5
+2025-05-18 16:47:41,488 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 0, Batch 0/848, Loss: 28.6831
+2025-05-18 16:47:41,488 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 5.0516 | giou_loss: 1.7124 | total_loss: 28.6831
+2025-05-18 16:47:54,470 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 0, Batch 50/848, Loss: 17.1900
+2025-05-18 16:47:54,471 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 2.9380 | giou_loss: 1.2500 | total_loss: 17.1900
+2025-05-18 16:48:08,086 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 0, Batch 100/848, Loss: 18.1450
+2025-05-18 16:48:08,087 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 3.1037 | giou_loss: 1.3133 | total_loss: 18.1450
+2025-05-18 16:48:21,709 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 0, Batch 150/848, Loss: 15.5983
+2025-05-18 16:48:21,709 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 2.6365 | giou_loss: 1.2078 | total_loss: 15.5983
+2025-05-18 16:48:35,338 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 0, Batch 200/848, Loss: 18.2181
+2025-05-18 16:48:35,339 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 3.1311 | giou_loss: 1.2812 | total_loss: 18.2181
+2025-05-18 16:48:49,045 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 0, Batch 250/848, Loss: 17.9686
+2025-05-18 16:48:49,045 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 3.0696 | giou_loss: 1.3103 | total_loss: 17.9686
+2025-05-18 16:49:02,720 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 0, Batch 300/848, Loss: 20.9387
+2025-05-18 16:49:02,721 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 3.6332 | giou_loss: 1.3865 | total_loss: 20.9387
+2025-05-18 16:49:16,394 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 0, Batch 350/848, Loss: 20.1867
+2025-05-18 16:49:16,394 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 3.4952 | giou_loss: 1.3554 | total_loss: 20.1867
+2025-05-18 16:49:30,047 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 0, Batch 400/848, Loss: 19.9482
+2025-05-18 16:49:30,048 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 3.4503 | giou_loss: 1.3482 | total_loss: 19.9482
+2025-05-18 16:49:43,721 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 0, Batch 450/848, Loss: 17.0606
+2025-05-18 16:49:43,722 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 2.9277 | giou_loss: 1.2111 | total_loss: 17.0606
+2025-05-18 16:49:57,404 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 0, Batch 500/848, Loss: 18.5462
+2025-05-18 16:49:57,405 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 3.1867 | giou_loss: 1.3064 | total_loss: 18.5462
+2025-05-18 16:50:11,129 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 0, Batch 550/848, Loss: 17.1345
+2025-05-18 16:50:11,129 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 2.9344 | giou_loss: 1.2312 | total_loss: 17.1345
+2025-05-18 16:50:24,866 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 0, Batch 600/848, Loss: 17.1241
+2025-05-18 16:50:24,867 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 2.9254 | giou_loss: 1.2486 | total_loss: 17.1241
+2025-05-18 16:50:38,634 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 0, Batch 650/848, Loss: 17.8316
+2025-05-18 16:50:38,634 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 3.0672 | giou_loss: 1.2477 | total_loss: 17.8316
+2025-05-18 16:50:52,351 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 0, Batch 700/848, Loss: 15.3707
+2025-05-18 16:50:52,351 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 2.6239 | giou_loss: 1.1256 | total_loss: 15.3707
+2025-05-18 16:51:06,073 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 0, Batch 750/848, Loss: 16.8535
+2025-05-18 16:51:06,073 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 2.8623 | giou_loss: 1.2709 | total_loss: 16.8535
+2025-05-18 16:51:19,909 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 0, Batch 800/848, Loss: 17.5790
+2025-05-18 16:51:19,910 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 2.9974 | giou_loss: 1.2961 | total_loss: 17.5790
+2025-05-18 16:51:32,888 - transvg_partial_freeze_20250518_164734 - INFO - Train Epoch 0, Loss: 17.5908
+2025-05-18 16:51:49,131 - transvg_partial_freeze_20250518_164734 - INFO - Pred box sample: [223.9999237060547, 223.9999237060547, 447.9996643066406, 447.99969482421875]
+2025-05-18 16:51:49,132 - transvg_partial_freeze_20250518_164734 - INFO - Target box sample: [207.0, 198.0, 287.0, 283.0]
+2025-05-18 16:51:49,214 - transvg_partial_freeze_20250518_164734 - INFO - Validation Epoch 0, Loss: 17.6660
+2025-05-18 16:51:49,214 - transvg_partial_freeze_20250518_164734 - INFO - Val metrics: Acc@0.25: 0.1033 | Acc@0.5: 0.0066 | Acc@0.75: 0.0003 | mIoU: 0.0714 | medianIoU: 0.0000 | mae_x1: 175.1535 | mae_y1: 169.7211 | mae_x2: 169.6537 | mae_y2: 163.3950 | center_x_error: 156.5242 | center_y_error: 150.1061 | width_error: 3.2319 | height_error: 3.1359 | loss: 17.6660
+2025-05-18 16:51:49,879 - transvg_partial_freeze_20250518_164734 - INFO - Saved model checkpoint to /home/pokle/Trans-VG/visual_grounding/checkpoints/transvg_partial_freeze_20250518_164734_epoch0.pth
+2025-05-18 16:51:49,880 - transvg_partial_freeze_20250518_164734 - INFO - New best model! Acc@0.5: 0.0066
+2025-05-18 16:51:49,880 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 1/5
+2025-05-18 16:51:50,897 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 1, Batch 0/848, Loss: 17.1127
+2025-05-18 16:51:50,898 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 2.9170 | giou_loss: 1.2639 | total_loss: 17.1127
+2025-05-18 16:52:04,661 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 1, Batch 50/848, Loss: 18.6507
+2025-05-18 16:52:04,661 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 3.2052 | giou_loss: 1.3122 | total_loss: 18.6507
+2025-05-18 16:52:18,441 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 1, Batch 100/848, Loss: 16.4603
+2025-05-18 16:52:18,441 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 2.7968 | giou_loss: 1.2382 | total_loss: 16.4603
+2025-05-18 16:52:32,271 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 1, Batch 150/848, Loss: 18.7036
+2025-05-18 16:52:32,272 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 3.2203 | giou_loss: 1.3011 | total_loss: 18.7036
+2025-05-18 16:52:46,102 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 1, Batch 200/848, Loss: 17.9144
+2025-05-18 16:52:46,102 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 3.0799 | giou_loss: 1.2574 | total_loss: 17.9144
+2025-05-18 16:52:59,942 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 1, Batch 250/848, Loss: 17.3567
+2025-05-18 16:52:59,942 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 2.9633 | giou_loss: 1.2700 | total_loss: 17.3567
+2025-05-18 16:53:13,733 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 1, Batch 300/848, Loss: 19.0331
+2025-05-18 16:53:13,733 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 3.2729 | giou_loss: 1.3343 | total_loss: 19.0331
+2025-05-18 16:53:27,593 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 1, Batch 350/848, Loss: 18.2985
+2025-05-18 16:53:27,593 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 3.1556 | giou_loss: 1.2603 | total_loss: 18.2985
+2025-05-18 16:53:41,444 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 1, Batch 400/848, Loss: 17.0804
+2025-05-18 16:53:41,444 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 2.9051 | giou_loss: 1.2774 | total_loss: 17.0804
+2025-05-18 16:53:55,327 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 1, Batch 450/848, Loss: 17.6914
+2025-05-18 16:53:55,328 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 3.0339 | giou_loss: 1.2609 | total_loss: 17.6914
+2025-05-18 16:54:09,247 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 1, Batch 500/848, Loss: 17.4038
+2025-05-18 16:54:09,247 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 2.9886 | giou_loss: 1.2305 | total_loss: 17.4038
+2025-05-18 16:54:23,124 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 1, Batch 550/848, Loss: 17.0420
+2025-05-18 16:54:23,125 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 2.9068 | giou_loss: 1.2540 | total_loss: 17.0420
+2025-05-18 16:54:37,063 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 1, Batch 600/848, Loss: 16.4353
+2025-05-18 16:54:37,063 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 2.8117 | giou_loss: 1.1885 | total_loss: 16.4353
+2025-05-18 16:54:51,033 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 1, Batch 650/848, Loss: 19.5561
+2025-05-18 16:54:51,033 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 3.3745 | giou_loss: 1.3419 | total_loss: 19.5561
+2025-05-18 16:55:05,032 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 1, Batch 700/848, Loss: 17.9121
+2025-05-18 16:55:05,033 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 3.0815 | giou_loss: 1.2523 | total_loss: 17.9121
+2025-05-18 16:55:19,073 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 1, Batch 750/848, Loss: 18.7366
+2025-05-18 16:55:19,073 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 3.2169 | giou_loss: 1.3260 | total_loss: 18.7366
+2025-05-18 16:55:33,097 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 1, Batch 800/848, Loss: 18.6912
+2025-05-18 16:55:33,097 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 3.2027 | giou_loss: 1.3388 | total_loss: 18.6912
+2025-05-18 16:55:46,267 - transvg_partial_freeze_20250518_164734 - INFO - Train Epoch 1, Loss: 17.4944
+2025-05-18 16:56:02,327 - transvg_partial_freeze_20250518_164734 - INFO - Pred box sample: [224.0, 224.0, 447.9999694824219, 447.9999694824219]
+2025-05-18 16:56:02,327 - transvg_partial_freeze_20250518_164734 - INFO - Target box sample: [207.0, 198.0, 287.0, 283.0]
+2025-05-18 16:56:02,409 - transvg_partial_freeze_20250518_164734 - INFO - Validation Epoch 1, Loss: 17.6660
+2025-05-18 16:56:02,410 - transvg_partial_freeze_20250518_164734 - INFO - Val metrics: Acc@0.25: 0.1033 | Acc@0.5: 0.0066 | Acc@0.75: 0.0003 | mIoU: 0.0714 | medianIoU: 0.0000 | mae_x1: 175.1535 | mae_y1: 169.7211 | mae_x2: 169.6537 | mae_y2: 163.3950 | center_x_error: 156.5242 | center_y_error: 150.1060 | width_error: 3.2319 | height_error: 3.1359 | loss: 17.6660
+2025-05-18 16:56:03,081 - transvg_partial_freeze_20250518_164734 - INFO - Saved model checkpoint to /home/pokle/Trans-VG/visual_grounding/checkpoints/transvg_partial_freeze_20250518_164734_epoch1.pth
+2025-05-18 16:56:03,081 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 2/5
+2025-05-18 16:56:04,080 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 2, Batch 0/848, Loss: 18.2493
+2025-05-18 16:56:04,080 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 3.1218 | giou_loss: 1.3202 | total_loss: 18.2493
+2025-05-18 16:56:18,845 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 2, Batch 50/848, Loss: 14.7436
+2025-05-18 16:56:18,845 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 2.4781 | giou_loss: 1.1765 | total_loss: 14.7436
+2025-05-18 16:56:33,576 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 2, Batch 100/848, Loss: 16.8693
+2025-05-18 16:56:33,576 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 2.8672 | giou_loss: 1.2667 | total_loss: 16.8693
+2025-05-18 16:56:48,281 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 2, Batch 150/848, Loss: 17.1477
+2025-05-18 16:56:48,282 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 2.9502 | giou_loss: 1.1984 | total_loss: 17.1477
+2025-05-18 16:57:03,043 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 2, Batch 200/848, Loss: 17.9544
+2025-05-18 16:57:03,044 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 3.0829 | giou_loss: 1.2700 | total_loss: 17.9544
+2025-05-18 16:57:17,833 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 2, Batch 250/848, Loss: 16.9596
+2025-05-18 16:57:17,834 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 2.9000 | giou_loss: 1.2299 | total_loss: 16.9596
+2025-05-18 16:57:32,653 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 2, Batch 300/848, Loss: 15.4611
+2025-05-18 16:57:32,653 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 2.6176 | giou_loss: 1.1865 | total_loss: 15.4611
+2025-05-18 16:57:47,520 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 2, Batch 350/848, Loss: 16.9981
+2025-05-18 16:57:47,521 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 2.8831 | giou_loss: 1.2913 | total_loss: 16.9981
+2025-05-18 16:58:02,305 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 2, Batch 400/848, Loss: 18.5417
+2025-05-18 16:58:02,306 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 3.1777 | giou_loss: 1.3265 | total_loss: 18.5417
+2025-05-18 16:58:17,157 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 2, Batch 450/848, Loss: 18.4956
+2025-05-18 16:58:17,157 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 3.1863 | giou_loss: 1.2822 | total_loss: 18.4956
+2025-05-18 16:58:31,995 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 2, Batch 500/848, Loss: 15.8553
+2025-05-18 16:58:31,995 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 2.7013 | giou_loss: 1.1744 | total_loss: 15.8553
+2025-05-18 16:58:46,845 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 2, Batch 550/848, Loss: 18.1861
+2025-05-18 16:58:46,845 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 3.1104 | giou_loss: 1.3172 | total_loss: 18.1861
+2025-05-18 16:59:01,667 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 2, Batch 600/848, Loss: 19.5620
+2025-05-18 16:59:01,667 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 3.3845 | giou_loss: 1.3198 | total_loss: 19.5620
+2025-05-18 16:59:16,515 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 2, Batch 650/848, Loss: 17.6630
+2025-05-18 16:59:16,516 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 3.0166 | giou_loss: 1.2900 | total_loss: 17.6630
+2025-05-18 16:59:31,358 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 2, Batch 700/848, Loss: 18.2063
+2025-05-18 16:59:31,358 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 3.1251 | giou_loss: 1.2903 | total_loss: 18.2063
+2025-05-18 16:59:46,202 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 2, Batch 750/848, Loss: 15.5876
+2025-05-18 16:59:46,202 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 2.6514 | giou_loss: 1.1654 | total_loss: 15.5876
+2025-05-18 17:00:01,035 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 2, Batch 800/848, Loss: 19.8848
+2025-05-18 17:00:01,035 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 3.4471 | giou_loss: 1.3246 | total_loss: 19.8848
+2025-05-18 17:00:14,973 - transvg_partial_freeze_20250518_164734 - INFO - Train Epoch 2, Loss: 17.4944
+2025-05-18 17:00:31,680 - transvg_partial_freeze_20250518_164734 - INFO - Pred box sample: [224.0, 224.0, 448.0, 448.0]
+2025-05-18 17:00:31,681 - transvg_partial_freeze_20250518_164734 - INFO - Target box sample: [207.0, 198.0, 287.0, 283.0]
+2025-05-18 17:00:31,757 - transvg_partial_freeze_20250518_164734 - INFO - Validation Epoch 2, Loss: 17.6660
+2025-05-18 17:00:31,758 - transvg_partial_freeze_20250518_164734 - INFO - Val metrics: Acc@0.25: 0.1033 | Acc@0.5: 0.0066 | Acc@0.75: 0.0003 | mIoU: 0.0714 | medianIoU: 0.0000 | mae_x1: 175.1535 | mae_y1: 169.7211 | mae_x2: 169.6537 | mae_y2: 163.3950 | center_x_error: 156.5242 | center_y_error: 150.1060 | width_error: 3.2319 | height_error: 3.1359 | loss: 17.6660
+2025-05-18 17:00:32,550 - transvg_partial_freeze_20250518_164734 - INFO - Saved model checkpoint to /home/pokle/Trans-VG/visual_grounding/checkpoints/transvg_partial_freeze_20250518_164734_epoch2.pth
+2025-05-18 17:00:32,551 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 3/5
+2025-05-18 17:00:33,576 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 3, Batch 0/848, Loss: 18.6432
+2025-05-18 17:00:33,576 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 3.2083 | giou_loss: 1.3009 | total_loss: 18.6432
+2025-05-18 17:00:48,234 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 3, Batch 50/848, Loss: 17.2724
+2025-05-18 17:00:48,234 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 2.9474 | giou_loss: 1.2677 | total_loss: 17.2724
+2025-05-18 17:01:02,989 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 3, Batch 100/848, Loss: 16.6539
+2025-05-18 17:01:02,990 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 2.8324 | giou_loss: 1.2458 | total_loss: 16.6539
+2025-05-18 17:01:17,798 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 3, Batch 150/848, Loss: 17.2308
+2025-05-18 17:01:17,798 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 2.9583 | giou_loss: 1.2197 | total_loss: 17.2308
+2025-05-18 17:01:32,613 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 3, Batch 200/848, Loss: 19.2255
+2025-05-18 17:01:32,613 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 3.3018 | giou_loss: 1.3583 | total_loss: 19.2255
+2025-05-18 17:01:47,304 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 3, Batch 250/848, Loss: 16.0426
+2025-05-18 17:01:47,304 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 2.7164 | giou_loss: 1.2303 | total_loss: 16.0426
+2025-05-18 17:02:02,076 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 3, Batch 300/848, Loss: 16.7453
+2025-05-18 17:02:02,076 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 2.8687 | giou_loss: 1.2009 | total_loss: 16.7453
+2025-05-18 17:02:16,860 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 3, Batch 350/848, Loss: 18.1361
+2025-05-18 17:02:16,860 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 3.1243 | giou_loss: 1.2573 | total_loss: 18.1361
+2025-05-18 17:02:31,647 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 3, Batch 400/848, Loss: 16.1943
+2025-05-18 17:02:31,647 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 2.7609 | giou_loss: 1.1949 | total_loss: 16.1943
+2025-05-18 17:02:46,502 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 3, Batch 450/848, Loss: 16.6111
+2025-05-18 17:02:46,502 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 2.8306 | giou_loss: 1.2289 | total_loss: 16.6111
+2025-05-18 17:03:01,317 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 3, Batch 500/848, Loss: 16.0737
+2025-05-18 17:03:01,318 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 2.7250 | giou_loss: 1.2243 | total_loss: 16.0737
+2025-05-18 17:03:16,046 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 3, Batch 550/848, Loss: 18.4893
+2025-05-18 17:03:16,046 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 3.1713 | giou_loss: 1.3164 | total_loss: 18.4893
+2025-05-18 17:03:30,799 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 3, Batch 600/848, Loss: 16.5249
+2025-05-18 17:03:30,800 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 2.7949 | giou_loss: 1.2752 | total_loss: 16.5249
+2025-05-18 17:03:45,556 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 3, Batch 650/848, Loss: 15.8825
+2025-05-18 17:03:45,557 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 2.7003 | giou_loss: 1.1904 | total_loss: 15.8825
+2025-05-18 17:04:00,314 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 3, Batch 700/848, Loss: 17.6895
+2025-05-18 17:04:00,314 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 3.0212 | giou_loss: 1.2917 | total_loss: 17.6895
+2025-05-18 17:04:15,167 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 3, Batch 750/848, Loss: 18.0774
+2025-05-18 17:04:15,168 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 3.0940 | giou_loss: 1.3036 | total_loss: 18.0774
+2025-05-18 17:04:29,905 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 3, Batch 800/848, Loss: 17.8819
+2025-05-18 17:04:29,906 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 3.0703 | giou_loss: 1.2652 | total_loss: 17.8819
+2025-05-18 17:04:43,805 - transvg_partial_freeze_20250518_164734 - INFO - Train Epoch 3, Loss: 17.4943
+2025-05-18 17:05:00,099 - transvg_partial_freeze_20250518_164734 - INFO - Pred box sample: [224.0, 224.0, 448.0, 448.0]
+2025-05-18 17:05:00,100 - transvg_partial_freeze_20250518_164734 - INFO - Target box sample: [207.0, 198.0, 287.0, 283.0]
+2025-05-18 17:05:00,177 - transvg_partial_freeze_20250518_164734 - INFO - Validation Epoch 3, Loss: 17.6660
+2025-05-18 17:05:00,178 - transvg_partial_freeze_20250518_164734 - INFO - Val metrics: Acc@0.25: 0.1033 | Acc@0.5: 0.0066 | Acc@0.75: 0.0003 | mIoU: 0.0714 | medianIoU: 0.0000 | mae_x1: 175.1535 | mae_y1: 169.7211 | mae_x2: 169.6537 | mae_y2: 163.3950 | center_x_error: 156.5242 | center_y_error: 150.1060 | width_error: 3.2319 | height_error: 3.1359 | loss: 17.6660
+2025-05-18 17:05:00,876 - transvg_partial_freeze_20250518_164734 - INFO - Saved model checkpoint to /home/pokle/Trans-VG/visual_grounding/checkpoints/transvg_partial_freeze_20250518_164734_epoch3.pth
+2025-05-18 17:05:00,877 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 4/5
+2025-05-18 17:05:01,877 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 4, Batch 0/848, Loss: 16.7958
+2025-05-18 17:05:01,877 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 2.8549 | giou_loss: 1.2606 | total_loss: 16.7958
+2025-05-18 17:05:16,625 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 4, Batch 50/848, Loss: 19.2127
+2025-05-18 17:05:16,625 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 3.3138 | giou_loss: 1.3219 | total_loss: 19.2127
+2025-05-18 17:05:31,402 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 4, Batch 100/848, Loss: 16.8074
+2025-05-18 17:05:31,402 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 2.8686 | giou_loss: 1.2322 | total_loss: 16.8074
+2025-05-18 17:05:46,022 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 4, Batch 150/848, Loss: 17.4057
+2025-05-18 17:05:46,022 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 2.9681 | giou_loss: 1.2827 | total_loss: 17.4057
+2025-05-18 17:06:00,615 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 4, Batch 200/848, Loss: 19.2439
+2025-05-18 17:06:00,616 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 3.3158 | giou_loss: 1.3323 | total_loss: 19.2439
+2025-05-18 17:06:15,267 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 4, Batch 250/848, Loss: 17.1166
+2025-05-18 17:06:15,268 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 2.9318 | giou_loss: 1.2289 | total_loss: 17.1166
+2025-05-18 17:06:29,892 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 4, Batch 300/848, Loss: 16.4579
+2025-05-18 17:06:29,893 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 2.8030 | giou_loss: 1.2214 | total_loss: 16.4579
+2025-05-18 17:06:44,484 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 4, Batch 350/848, Loss: 19.2260
+2025-05-18 17:06:44,485 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 3.3101 | giou_loss: 1.3377 | total_loss: 19.2260
+2025-05-18 17:06:59,058 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 4, Batch 400/848, Loss: 16.4948
+2025-05-18 17:06:59,058 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 2.7987 | giou_loss: 1.2507 | total_loss: 16.4948
+2025-05-18 17:07:13,639 - transvg_partial_freeze_20250518_164734 - INFO - Epoch 4, Batch 450/848, Loss: 17.7676
+2025-05-18 17:07:13,639 - transvg_partial_freeze_20250518_164734 - INFO - Train metrics: l1_loss: 3.0353 | giou_loss: 1.2956 | total_loss: 17.7676

@@ -1,0 +1,85 @@
+2025-05-18 16:28:31,614 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Initialized logger: transvg_both_frozen_xyxy_20250518_162829
+2025-05-18 16:28:31,614 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Configuration: {
+  "data_root": "/home/pokle/Trans-VG/visual_grounding/dior-rsvg",
+  "image_size": 224,
+  "max_text_len": 40,
+  "hidden_dim": 256,
+  "bert_model": "bert-base-uncased",
+  "dropout": 0.1,
+  "num_heads": 8,
+  "num_encoder_layers": 6,
+  "cross_layers": 4,
+  "dim_feedforward": 2048,
+  "mlp_hidden_dim": 256,
+  "backbone": "resnet50",
+  "pretrained": true,
+  "freeze_backbone": true,
+  "freeze_linguistic": true,
+  "batch_size": 32,
+  "num_workers": 4,
+  "learning_rate": 0.0001,
+  "weight_decay": 0.0001,
+  "num_epochs": 100,
+  "lr": 0.0005,
+  "lr_bert": 1e-05,
+  "lr_drop": 70,
+  "output_dir": "output",
+  "epochs": 1
+}
+2025-05-18 16:28:31,615 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Using device: cuda:1
+2025-05-18 16:28:31,615 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Both visual and linguistic backbones will be frozen.
+2025-05-18 16:28:31,615 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Building data loaders...
+2025-05-18 16:28:32,920 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Train dataset size: 27133
+2025-05-18 16:28:32,920 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Val dataset size: 3765
+2025-05-18 16:28:32,920 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Test dataset size: 7422
+2025-05-18 16:28:32,920 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Building model...
+2025-05-18 16:28:34,226 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Starting training...
+2025-05-18 16:28:34,226 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Epoch 0/1
+2025-05-18 16:28:35,987 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Epoch 0, Batch 0/848, Loss: 29.8223
+2025-05-18 16:28:35,988 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Train metrics: l1_loss: 5.2654 | giou_loss: 1.7477 | total_loss: 29.8223
+2025-05-18 16:28:43,604 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Epoch 0, Batch 50/848, Loss: 18.9634
+2025-05-18 16:28:43,604 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Train metrics: l1_loss: 3.2745 | giou_loss: 1.2956 | total_loss: 18.9634
+2025-05-18 16:28:51,188 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Epoch 0, Batch 100/848, Loss: 19.4972
+2025-05-18 16:28:51,188 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Train metrics: l1_loss: 3.3588 | giou_loss: 1.3516 | total_loss: 19.4972
+2025-05-18 16:28:58,774 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Epoch 0, Batch 150/848, Loss: 17.2723
+2025-05-18 16:28:58,774 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Train metrics: l1_loss: 2.9496 | giou_loss: 1.2621 | total_loss: 17.2723
+2025-05-18 16:29:06,354 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Epoch 0, Batch 200/848, Loss: 16.2591
+2025-05-18 16:29:06,354 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Train metrics: l1_loss: 2.7738 | giou_loss: 1.1950 | total_loss: 16.2591
+2025-05-18 16:29:13,950 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Epoch 0, Batch 250/848, Loss: 16.7987
+2025-05-18 16:29:13,950 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Train metrics: l1_loss: 2.8536 | giou_loss: 1.2653 | total_loss: 16.7987
+2025-05-18 16:29:21,554 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Epoch 0, Batch 300/848, Loss: 18.3935
+2025-05-18 16:29:21,554 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Train metrics: l1_loss: 3.1519 | giou_loss: 1.3169 | total_loss: 18.3935
+2025-05-18 16:29:29,140 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Epoch 0, Batch 350/848, Loss: 18.0468
+2025-05-18 16:29:29,140 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Train metrics: l1_loss: 3.1093 | giou_loss: 1.2502 | total_loss: 18.0468
+2025-05-18 16:29:36,699 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Epoch 0, Batch 400/848, Loss: 18.0327
+2025-05-18 16:29:36,700 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Train metrics: l1_loss: 3.1104 | giou_loss: 1.2405 | total_loss: 18.0327
+2025-05-18 16:29:44,233 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Epoch 0, Batch 450/848, Loss: 17.6179
+2025-05-18 16:29:44,234 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Train metrics: l1_loss: 3.0229 | giou_loss: 1.2517 | total_loss: 17.6179
+2025-05-18 16:29:51,772 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Epoch 0, Batch 500/848, Loss: 16.6229
+2025-05-18 16:29:51,772 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Train metrics: l1_loss: 2.8346 | giou_loss: 1.2251 | total_loss: 16.6229
+2025-05-18 16:29:59,244 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Epoch 0, Batch 550/848, Loss: 15.7724
+2025-05-18 16:29:59,244 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Train metrics: l1_loss: 2.6829 | giou_loss: 1.1789 | total_loss: 15.7724
+2025-05-18 16:30:06,739 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Epoch 0, Batch 600/848, Loss: 17.4481
+2025-05-18 16:30:06,739 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Train metrics: l1_loss: 2.9894 | giou_loss: 1.2505 | total_loss: 17.4481
+2025-05-18 16:30:14,260 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Epoch 0, Batch 650/848, Loss: 17.6957
+2025-05-18 16:30:14,260 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Train metrics: l1_loss: 3.0511 | giou_loss: 1.2202 | total_loss: 17.6957
+2025-05-18 16:30:21,764 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Epoch 0, Batch 700/848, Loss: 17.0320
+2025-05-18 16:30:21,764 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Train metrics: l1_loss: 2.9022 | giou_loss: 1.2605 | total_loss: 17.0320
+2025-05-18 16:30:29,242 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Epoch 0, Batch 750/848, Loss: 16.8394
+2025-05-18 16:30:29,243 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Train metrics: l1_loss: 2.8757 | giou_loss: 1.2304 | total_loss: 16.8394
+2025-05-18 16:30:36,709 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Epoch 0, Batch 800/848, Loss: 16.9408
+2025-05-18 16:30:36,710 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Train metrics: l1_loss: 2.9090 | giou_loss: 1.1978 | total_loss: 16.9408
+2025-05-18 16:30:43,845 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Train Epoch 0, Loss: 17.5880
+2025-05-18 16:31:00,512 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Pred box sample: [224.0, 224.0, 448.0, 448.0]
+2025-05-18 16:31:00,513 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Target box sample: [207.0, 198.0, 287.0, 283.0]
+2025-05-18 16:31:00,614 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Validation Epoch 0, Loss: 17.6660
+2025-05-18 16:31:00,614 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Val metrics: Acc@0.25: 0.1033 | Acc@0.5: 0.0066 | Acc@0.75: 0.0003 | mIoU: 0.0714 | medianIoU: 0.0000 | mae_x1: 175.1535 | mae_y1: 169.7211 | mae_x2: 169.6537 | mae_y2: 163.3950 | center_x_error: 156.5242 | center_y_error: 150.1060 | width_error: 3.2319 | height_error: 3.1359 | loss: 17.6660
+2025-05-18 16:31:01,264 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Saved model checkpoint to /home/pokle/Trans-VG/visual_grounding/checkpoints/transvg_both_frozen_xyxy_20250518_162829_epoch0.pth
+2025-05-18 16:31:01,265 - transvg_both_frozen_xyxy_20250518_162829 - INFO - New best model! Acc@0.5: 0.0066
+2025-05-18 16:31:01,265 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Final evaluation on test set...
+2025-05-18 16:31:32,607 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Pred box sample: [223.99996948242188, 223.99996948242188, 447.9998779296875, 447.9999084472656]
+2025-05-18 16:31:32,607 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Target box sample: [133.0, 237.0, 684.0, 672.0]
+2025-05-18 16:31:32,771 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Validation Epoch 1, Loss: 17.4719
+2025-05-18 16:31:32,771 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Val metrics: Acc@0.25: 0.1095 | Acc@0.5: 0.0108 | Acc@0.75: 0.0005 | mIoU: 0.0758 | medianIoU: 0.0000 | mae_x1: 170.7338 | mae_y1: 166.1603 | mae_x2: 170.1781 | mae_y2: 163.0922 | center_x_error: 154.7792 | center_y_error: 148.5581 | width_error: 3.1298 | height_error: 3.1564 | loss: 17.4719
+2025-05-18 16:31:32,773 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Test metrics: {'Acc@0.25': 0.1095392077607114, 'Acc@0.5': 0.010778765831312315, 'Acc@0.75': 0.0005389382915656157, 'mIoU': 0.07579219769554313, 'medianIoU': 0.0, 'mae_x1': 170.73376, 'mae_y1': 166.16034, 'mae_x2': 170.17812, 'mae_y2': 163.09216, 'center_x_error': 154.77917, 'center_y_error': 148.55807, 'width_error': 3.1298456, 'height_error': 3.156407, 'loss': 17.471923230633006}
+2025-05-18 16:31:32,773 - transvg_both_frozen_xyxy_20250518_162829 - INFO - Finished logging session
