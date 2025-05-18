@@ -1,0 +1,96 @@
+@startuml TransVG Architecture
+
+!define RECTANGLE class
+!define INTERFACE interface
+
+skinparam backgroundColor white
+skinparam classBackgroundColor LightCyan
+skinparam classBorderColor DarkSlateGray
+skinparam arrowColor DarkSlateGray
+skinparam stereotypeCBackgroundColor PaleGreen
+skinparam stereotypeABackgroundColor LightYellow
+
+' Main components
+RECTANGLE "TransVG" as TransVG #LightSalmon {
+}
+
+' Input components
+RECTANGLE "Image Input\n(B, 3, 224, 224)" as ImageInput #LightBlue
+RECTANGLE "Text Input\n(B, L)" as TextInput #LightGreen
+
+' Core components
+RECTANGLE "Vision Encoder" as VisionEncoder #LightCyan {
+    RECTANGLE "ResNet50\nBackbone" as ResNetBackbone
+    RECTANGLE "2D Projection" as Projection
+    RECTANGLE "Transformer\nEncoder" as VisionTransformer
+    RECTANGLE "Position\nEmbedding" as PositionEmbedding
+    
+    ResNetBackbone --> Projection
+    Projection --> VisionTransformer
+    PositionEmbedding --> Projection
+}
+
+RECTANGLE "Language Encoder" as LanguageEncoder #LightGreen {
+    RECTANGLE "BERT" as BERT
+    RECTANGLE "Projection" as TextProjection
+    
+    BERT --> TextProjection
+}
+
+RECTANGLE "Cross-Modal Fusion" as CrossModalFusion #LightPink {
+    RECTANGLE "Cross-Attention\nLayers" as CrossAttention
+    RECTANGLE "FFN" as FFN
+    RECTANGLE "LayerNorm" as LayerNorm
+    
+    CrossAttention --> FFN
+    FFN --> LayerNorm
+}
+
+RECTANGLE "Global Feature Token" as GlobalToken #LightYellow
+
+RECTANGLE "Prediction Head" as PredictionHead #LightBlue {
+    RECTANGLE "MLP" as MLP
+    RECTANGLE "Box Prediction\n[xmin, ymin, xmax, ymax]" as BoxPrediction
+    
+    MLP --> BoxPrediction
+}
+
+RECTANGLE "Bounding Box\nPrediction\n(B, 4)" as Output #LightYellow
+
+' Connections
+ImageInput --> VisionEncoder
+TextInput --> LanguageEncoder
+
+VisionEncoder --> GlobalToken : "Concat"
+GlobalToken --> CrossModalFusion : "Query"
+LanguageEncoder --> CrossModalFusion : "Key/Value"
+
+CrossModalFusion --> PredictionHead : "Global Feature"
+PredictionHead --> Output
+
+' Add data flow
+note right of PredictionHead
+  MLP layers:
+  hidden_dim → mlp_hidden_dim → 4
+  Sigmoid activation for [0,1] coordinates
+end note
+
+note bottom of CrossModalFusion
+  4 cross-attention layers apply
+  vision-guided-by-language fusion
+end note
+
+note right of VisionEncoder
+  ResNet50 + Visual Transformer:
+  - Partially frozen (early layers)
+  - 6 transformer layers
+  - 7×7 feature map
+end note
+
+note right of LanguageEncoder
+  BERT encoder:
+  - Partially trainable
+  - Last 4 layers unfrozen
+end note
+
+@enduml 

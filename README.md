@@ -1,123 +1,133 @@
-# TransVG: Visual Grounding for Satellite Images
+# SatVG: Visual Grounding Model
 
-This repository contains an implementation of the TransVG (Transformer-based Visual Grounding) model for satellite imagery, based on the [TransVG](https://arxiv.org/abs/2104.08541) and [TransVG++](https://arxiv.org/pdf/2206.06619v1) architectures.
+This repository contains an implementation of the TransVG (Transformer for Visual Grounding) model, a cross-modal architecture for grounding natural language expressions in images.
 
-## Architecture
+## Overview
 
-The model follows the TransVG++ architecture with the following components:
+Visual grounding is the task of localizing an image region described by a natural language expression. Our implementation uses a transformer-based architecture that performs cross-modal fusion between visual and linguistic features to predict bounding box coordinates.
 
-1. **Vision Branch** (Language Conditioned Vision Transformer)
-   - Patch Embedding: Transforms the input image into patch embeddings
-   - Vision Encoder Layers: Standard transformer encoder layers
-   - Language Conditioned Vision Encoder Layer: Vision encoder layer with cross-attention to language features
+## Model Architecture
 
-2. **Language Branch**
-   - BERT-based language encoder
-   - Transformer layers on top of BERT
-   - Linear projection for feature dimensionality matching
+![TransVG Architecture](./docs/images/SatVG-Architecture-New.png)
 
-3. **Prediction Head**
-   - MLP-based regression head for bounding box prediction
+The TransVG architecture consists of the following components:
 
-## Directory Structure
+1. **Vision Encoder**: A ResNet50 backbone followed by a transformer encoder to extract visual features
+   - ResNet50 pretrained on ImageNet
+   - Early layers frozen, later layers trainable
+   - 2D projection from 2048 to hidden_dim (256)
+   - Transformer with 6 layers and 8 attention heads
+   - Position embeddings for spatial awareness
 
-```
-visual_grounding/
-├── configs/
-│   └── model_config.py     # Model configuration
-├── models/
-│   ├── dataloader.py       # Data loader for the SatVG dataset
-│   ├── language_encoder.py # Language branch of the model
-│   ├── losses.py           # Loss functions (L1 and GIoU losses)
-│   ├── prediction_head.py  # MLP-based prediction head
-│   ├── transvg.py          # Main TransVG model
-│   └── vision_encoder.py   # Vision branch of the model
-├── utils/
-│   ├── logger.py           # Logging utilities
-│   └── metrics.py          # Evaluation metrics
-├── logs/                   # Training logs
-├── checkpoints/            # Model checkpoints
-├── train.py                # Training script
-└── README.md               # This file
-```
+2. **Language Encoder**: A BERT-based encoder for text understanding
+   - BERT-base-uncased with 12 layers
+   - Last 4 layers unfrozen for fine-tuning
+   - Projection to match hidden_dim if needed
 
-## Requirements
+3. **Cross-Modal Fusion**: Transformer-based cross-attention for multimodal integration
+   - 4 cross-attention layers
+   - Language features guide the visual feature processing
+   - Global token aggregates contextual information
+
+4. **Prediction Head**: MLP for bounding box coordinate regression
+   - Outputs normalized [xmin, ymin, xmax, ymax] coordinates in [0,1] range
+   - Ensures valid box constraints (xmax > xmin, ymax > ymin)
+
+## Performance
+
+Our baseline model achieves the following performance on the DIOR-RSVG dataset:
+
+| Metric       | Value  |
+|--------------|--------|
+| Acc@0.25     | 0.3399 |
+| Acc@0.5      | 0.1241 |
+| Acc@0.75     | 0.0179 |
+| mIoU         | 0.1947 |
+| medianIoU    | 0.1049 |
+
+## Setup and Installation
+
+### Requirements
 
 - Python 3.8+
 - PyTorch 1.10+
-- Transformers (Hugging Face)
-- Numpy
-- Pillow
-- (Optional) Weights & Biases for experiment tracking
+- torchvision
+- transformers (Hugging Face)
+- numpy, PIL, etc.
 
-## Dataset
+### Installation
 
-The model is designed to work with the DIOR-RSVG satellite visual grounding dataset. The dataset should have the following structure:
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/Trans-VG.git
+cd Trans-VG
+
+# Create a virtual environment
+conda create -n transvg python=3.8
+conda activate transvg
+
+# Install dependencies
+pip install -r requirements.txt
+```
+
+### Dataset
+
+The model is trained on the DIOR-RSVG dataset, which should be structured as follows:
 
 ```
 dior-rsvg/
-├── JPEGImages/      # Image files
-├── dior-train.pth   # Training data
-├── dior-val.pth     # Validation data
-└── dior-test.pth    # Test data
+├── JPEGImages/  # Image files
+├── dior-train.pth  # Training annotations
+├── dior-val.pth    # Validation annotations
+└── dior-test.pth   # Test annotations
 ```
 
-## Usage
+## Training
 
-### Training
+To train the model with our optimized settings:
 
 ```bash
-python train.py --log_name transvg_experiment --epochs 100 --batch_size 32 --lr 1e-4
+./run_fixed_coordinates.sh
 ```
 
-Optional arguments:
-- `--config`: Path to a custom config file
-- `--log_name`: Name for log files
-- `--use_wandb`: Enable Weights & Biases logging
-- `--epochs`: Number of epochs to train
-- `--batch_size`: Batch size
-- `--lr`: Learning rate
-- `--resume`: Path to checkpoint to resume training from
+This script sets appropriate environment variables and runs the training with the following key parameters:
+- Partially frozen vision backbone (ResNet50)
+- 32 batch size
+- Learning rate of 1e-3
+- Optimizer: AdamW with weight decay 1e-4
+- Gradient clipping at 1.0
 
-### Evaluation
+## Evaluation
 
-The model can be evaluated on the test set by running:
+To evaluate a trained model:
 
 ```bash
-python train.py --resume path/to/checkpoint --epochs 0
+python evaluate.py --checkpoint /path/to/checkpoint.pth --split test
 ```
 
-This will load the model from the checkpoint and only run evaluation on the test set.
+## Visualization
 
-## Model Training Details
+To visualize predictions on sample images:
 
-The model is trained with the following strategy:
-
-1. L1 loss and GIoU loss for bounding box regression
-2. AdamW optimizer with different learning rates for different components
-3. Step learning rate decay
-4. Model checkpointing based on validation accuracy
-
-## Future Improvements
-
-- Fine-tuning of the vision and language encoders
-- Data augmentation techniques specific to satellite imagery
-- Multi-scale feature fusion
-- Attention visualization for interpretability
-
-## References
-
-- TransVG: End-to-End Visual Grounding with Transformers - https://arxiv.org/abs/2104.08541
-- TransVG++: End-to-End Visual Grounding with Language Conditioned Vision Transformer - https://arxiv.org/pdf/2206.06619v1 
-
-## To Train
-```
-cd /home/pokle/Trans-VG
-python visual_grounding/train.py --log_name transvg_experiment
+```bash
+python visualize.py --checkpoint /path/to/checkpoint.pth --image /path/to/image.jpg --query "your text query"
 ```
 
-## To Eval
+## Citation
+
+If you use this code, please cite the original TransVG paper:
+
 ```
-cd /home/pokle/Trans-VG
-python visual_grounding/eval.py --checkpoint /path/to/checkpoint.pth
+@InProceedings{Deng_2021_ICCV,
+    author    = {Deng, Jiajun and Yang, Zhengyuan and Chen, Tianlang and Zhou, Wengang and Li, Houqiang},
+    title     = {TransVG: End-to-End Visual Grounding With Transformers},
+    booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
+    month     = {October},
+    year      = {2021},
+    pages     = {1769-1779}
+}
 ```
+
+## License
+
+[MIT License](LICENSE)
