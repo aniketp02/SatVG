@@ -6,6 +6,7 @@ This document tracks the experiments conducted with the TransVG model for visual
 
 - [Baseline Model](#baseline-model)
 - [Completed Experiments](#completed-experiments)
+- [Ongoing Experiments](#ongoing-experiments)
 - [Planned Experiments](#planned-experiments)
 - [Improvement Ideas](#improvement-ideas)
 
@@ -90,23 +91,78 @@ Performance on test set after 5 epochs:
 - mIoU: 0.1947 (+0.1233)
 - medianIoU: 0.1049
 
-## Planned Experiments
+## Ongoing Experiments
 
 ### Experiment 3: ViT DINO Backbone
 
-**Description**: Replace the ResNet50 visual backbone with a Vision Transformer (ViT) DINO model.
+**Start Date**: 2025-05-20
+**Current Status**: In progress (Epoch 7/200)
+
+**Description**: Replaced the ResNet50 visual backbone with a Vision Transformer (ViT) DINO model.
 
 **Hypothesis**: DINO pre-training provides better contextualized visual features that should improve grounding performance.
 
-**Implementation Plan**:
-1. Integrate ViT DINO model as visual backbone
-2. Adjust hidden dimensions to match DINO output
-3. Implement proper freezing strategy
-4. Test different DINO variants (ViT-B/16, ViT-S/16)
+**Implementation Details**:
+1. Integrated DINO ViT as visual backbone
+2. Partially frozen DINO backbone
+3. Partially frozen linguistic backbone
+4. Hidden dimension: 256
+5. Batch size: 16 (reduced from 32 due to memory constraints)
+6. Learning rate: 5e-5, BERT learning rate: 2e-5
 
-**Expected Outcome**: Improvement in mIoU and Acc@0.5 metrics due to better visual representations.
+**Current Best Performance (Epoch 5/200)**:
+- Acc@0.25: 0.3288
+- Acc@0.5: 0.1193
+- Acc@0.75: 0.0173
+- mIoU: 0.1893
+- medianIoU: 0.0944
+- Loss: 4.3884
 
-### Experiment 4: Data Augmentation
+**Observations**:
+- Model shows consistent improvement from epochs 1-5
+- Slight performance dip in epoch 6
+- Training loss shows expected fluctuations but overall decreasing trend
+- Performance approaching baseline model with potential for further gains
+
+**Next Steps**:
+- Continue training to at least 15-20 epochs
+- Monitor validation metrics for stabilization
+- Consider learning rate adjustments if performance plateaus
+
+### Experiment 4: Increased Image Size and Cross-Attention Layers
+
+**Start Date**: 2025-05-20
+**Current Status**: In progress
+
+**Description**: Increased input image resolution and number of cross-attention layers to improve feature representation and cross-modal interaction.
+
+**Implementation Details**:
+- Image size: 384×384 (increased from 224×224)
+- Cross-attention layers: 6 (increased from 4)
+- Fixed coordinate system following Experiment 2
+
+**Current Performance**:
+- Acc@0.25: 0.3150
+- Acc@0.5: 0.1116
+- Acc@0.75: 0.0130
+- mIoU: 0.1798
+- medianIoU: 0.0853
+- Loss: 4.5501
+
+**Observations**:
+- Higher resolution allows for more detailed feature extraction
+- Model showing promising performance comparable to baseline
+- Increased cross-attention layers provide more effective cross-modal fusion
+- Larger input size increases memory requirements
+
+**Next Steps**:
+- Continue training to assess full potential
+- Compare performance trajectory against the DINO backbone experiment
+- Evaluate if the increased complexity justifies the performance gain
+
+## Planned Experiments
+
+### Experiment 5: Data Augmentation
 
 **Description**: Implement data augmentation strategies to improve model generalization.
 
@@ -119,7 +175,7 @@ Performance on test set after 5 epochs:
 
 **Expected Outcome**: Slower initial training but better final performance, especially on test set.
 
-### Experiment 5: Learning Rate Schedule Optimization
+### Experiment 6: Learning Rate Schedule Optimization
 
 **Description**: Implement learning rate warmup and cosine decay instead of step decay.
 
@@ -135,7 +191,6 @@ Performance on test set after 5 epochs:
 ## Improvement Ideas
 
 1. **Architectural Improvements**:
-   - Increase cross-attention layers (from 4 to 6 or 8)
    - Add multi-scale feature fusion from vision backbone
    - Experiment with different normalization strategies
 
