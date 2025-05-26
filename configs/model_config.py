@@ -19,7 +19,7 @@ class ModelConfig:
     lang_heads = 12
     
     # Cross-Modal Encoder
-    cross_layers = 4
+    cross_layers = 6
     
     # Transformer parameters
     dim_feedforward = 2048
@@ -35,7 +35,7 @@ class ModelConfig:
     lr = 1e-4
     lr_bert = 1e-5
     weight_decay = 1e-4
-    epochs = 100
+    epochs = 200
     lr_drop = 70
     
     # Paths
@@ -55,7 +55,7 @@ class ModelConfig:
     def __init__(self):
         # Data settings
         self.data_root = '/home/pokle/Trans-VG/visual_grounding/dior-rsvg'
-        self.image_size = 224
+        self.image_size = 640
         self.max_text_len = 40
         
         # Model settings
@@ -64,14 +64,14 @@ class ModelConfig:
         self.dropout = 0.1
         self.num_heads = 8
         self.num_encoder_layers = 6
-        self.cross_layers = 4
+        self.cross_layers = 6
         self.dim_feedforward = 2048
         self.mlp_hidden_dim = 256
         
         # Vision backbone settings
-        self.backbone = 'resnet50'
+        self.vision_backbone = 'resnet50'  # Options: 'resnet50', 'dino_vit'
         self.pretrained = True
-        self.freeze_backbone = True
+        self.freeze_backbone = False
         self.partial_freeze_vision = True
         
         # Linguistic backbone settings

@@ -21,6 +21,7 @@ from models.custom_dataloader import build_dataloaders
 from utils.logger import get_logger
 from utils.metrics import calculate_metrics
 from configs.model_config import ModelConfig
+from configs.dino_vit_config import DinoVitConfig
 
 
 def parse_args():
@@ -38,6 +39,7 @@ def parse_args():
     parser.add_argument("--freeze_both", action="store_true", help="Freeze both visual and linguistic backbones")
     parser.add_argument("--partial_freeze_vision", action="store_true", help="Partially freeze vision backbone (early layers only)")
     parser.add_argument("--partial_freeze_linguistic", action="store_true", help="Partially freeze linguistic backbone (embeddings and early layers only)")
+    parser.add_argument("--dino_vit", action="store_true", help="Use DINO ViT as the vision backbone")
     
     return parser.parse_args()
 
@@ -188,7 +190,12 @@ def main():
     args = parse_args()
     
     # Load configuration
-    config = ModelConfig()
+    if args.dino_vit:
+        config = DinoVitConfig()
+        logger_msg = "Using DINO ViT backbone"
+    else:
+        config = ModelConfig()
+        logger_msg = "Using ResNet50 backbone"
     
     # Override config with command line arguments
     if args.epochs is not None:
@@ -202,9 +209,9 @@ def main():
     if args.freeze_both:
         config.freeze_backbone = True
         config.freeze_linguistic = True
-        logger_msg = "Both backbones will be frozen"
+        logger_msg += " | Both backbones will be frozen"
     else:
-        logger_msg = f"Visual backbone freeze: {config.freeze_backbone}, Linguistic backbone freeze: {config.freeze_linguistic}"
+        logger_msg += f" | Visual backbone freeze: {config.freeze_backbone}, Linguistic backbone freeze: {config.freeze_linguistic}"
     
     # Handle partial freezing options
     if args.partial_freeze_vision:

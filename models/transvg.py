@@ -8,42 +8,53 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torchvision.models import resnet50, ResNet50_Weights
 from transformers import BertModel, BertConfig
+from models.dino_vit import DinoVitBackbone
 
 class VisionEncoder(nn.Module):
-    """Vision encoder based on ResNet backbone with transformer layers"""
+    """Vision encoder with configurable backbone and transformer layers"""
     def __init__(self, config):
         super().__init__()
-        # Initialize ResNet backbone
-        if config.pretrained:
-            self.backbone = resnet50(weights=ResNet50_Weights.IMAGENET1K_V1)
-        else:
-            self.backbone = resnet50()
-            
-        # Handle backbone freezing strategy
-        if config.freeze_backbone:
-            if hasattr(config, 'partial_freeze_vision') and config.partial_freeze_vision:
-                # Partially freeze the backbone - freeze only early layers
-                # Get all children as a list to access by index
-                backbone_children = list(self.backbone.children())
-                
-                # Freeze specific early layers (conv1, bn1, maxpool, and first 2 residual blocks)
-                for i in range(6):  # First 6 modules (0-5) of ResNet
-                    if i < len(backbone_children):
-                        for param in backbone_children[i].parameters():
-                            param.requires_grad = False
-                
-                print(f"Partially froze vision backbone: first 6 modules frozen, later modules trainable")
-            else:
-                # Completely freeze the backbone
-                for param in self.backbone.parameters():
-                    param.requires_grad = False
-                print(f"Completely froze vision backbone")
         
-        # Remove the final classification layer
-        self.backbone = nn.Sequential(*list(self.backbone.children())[:-2])
+        # Select backbone based on config
+        backbone_type = getattr(config, 'vision_backbone', 'resnet50')
+        
+        if backbone_type == 'dino_vit':
+            # Use DINO ViT backbone
+            self.backbone = DinoVitBackbone(config)
+            backbone_dim = self.backbone.output_dim  # 768 for ViT-B/16
+        else:
+            # Default: use ResNet50
+            if config.pretrained:
+                self.backbone = resnet50(weights=ResNet50_Weights.IMAGENET1K_V1)
+            else:
+                self.backbone = resnet50()
+                
+            # Handle backbone freezing strategy
+            if config.freeze_backbone:
+                if hasattr(config, 'partial_freeze_vision') and config.partial_freeze_vision:
+                    # Partially freeze the backbone - freeze only early layers
+                    # Get all children as a list to access by index
+                    backbone_children = list(self.backbone.children())
+                    
+                    # Freeze specific early layers (conv1, bn1, maxpool, and first 2 residual blocks)
+                    for i in range(6):  # First 6 modules (0-5) of ResNet
+                        if i < len(backbone_children):
+                            for param in backbone_children[i].parameters():
+                                param.requires_grad = False
+                    
+                    print(f"Partially froze vision backbone: first 6 modules frozen, later modules trainable")
+                else:
+                    # Completely freeze the backbone
+                    for param in self.backbone.parameters():
+                        param.requires_grad = False
+                    print(f"Completely froze vision backbone")
+            
+            # Remove the final classification layer for ResNet
+            self.backbone = nn.Sequential(*list(self.backbone.children())[:-2])
+            backbone_dim = 2048  # ResNet50 output channels
         
         # Projection layer to match hidden dimension
-        self.proj = nn.Conv2d(2048, config.hidden_dim, kernel_size=1)
+        self.proj = nn.Conv2d(backbone_dim, config.hidden_dim, kernel_size=1) if backbone_type == 'resnet50' else nn.Linear(backbone_dim, config.hidden_dim)
         
         # Transformer encoder layers
         encoder_layer = nn.TransformerEncoderLayer(
@@ -58,9 +69,22 @@ class VisionEncoder(nn.Module):
             num_layers=config.num_encoder_layers
         )
         
-        # Position embeddings for transformer
-        self.pos_embed = nn.Parameter(torch.zeros(1, config.hidden_dim, 7, 7))
-        nn.init.normal_(self.pos_embed, std=0.02)
+        # Position embeddings for transformer - we'll create these dynamically based on feature map size
+        # Only needed for ResNet, as ViT already has position embeddings
+        if backbone_type == 'resnet50':
+            # Calculate feature map size based on input image size
+            # ResNet50 downsamples by a factor of 32 (5 strides of factor 2)
+            img_size = config.image_size if hasattr(config, 'image_size') else 224
+            feature_size = img_size // 32
+            
+            # Create position embeddings with the correct size
+            self.pos_embed = nn.Parameter(torch.zeros(1, config.hidden_dim, feature_size, feature_size))
+            nn.init.normal_(self.pos_embed, std=0.02)
+        else:
+            self.pos_embed = None
+        
+        # Store backbone type for forward pass
+        self.backbone_type = backbone_type
         
     def forward(self, x):
         """
@@ -73,24 +97,56 @@ class VisionEncoder(nn.Module):
             Vision features of shape (B, N, D)
             where N is the number of visual tokens and D is hidden_dim
         """
-        # Extract features through backbone (B, 2048, H/32, W/32)
-        x = self.backbone(x)
-        
-        # Project to hidden dimension (B, hidden_dim, H/32, W/32)
-        x = self.proj(x)
-        
-        # Add position embeddings
-        x = x + self.pos_embed
-        
-        # Reshape for transformer: (B, hidden_dim, H, W) -> (B, hidden_dim, H*W) -> (H*W, B, hidden_dim)
-        batch_size, dim, h, w = x.shape
-        x = x.flatten(2).permute(2, 0, 1)
-        
-        # Pass through transformer
-        x = self.transformer(x)
-        
-        # Reshape back: (H*W, B, hidden_dim) -> (B, H*W, hidden_dim)
-        x = x.permute(1, 0, 2)
+        if self.backbone_type == 'dino_vit':
+            # DINO ViT forward
+            x = self.backbone(x)  # (B, num_patches+1, hidden_dim)
+            
+            # Project to hidden dimension
+            x = self.proj(x)  # (B, num_patches+1, hidden_dim)
+            
+            # Reshape for transformer: (B, S, D) -> (S, B, D)
+            x = x.transpose(0, 1)
+            
+            # Pass through transformer
+            x = self.transformer(x)
+            
+            # Reshape back: (S, B, D) -> (B, S, D)
+            x = x.transpose(0, 1)
+            
+        else:
+            # ResNet50 forward
+            # Extract features through backbone (B, 2048, H/32, W/32)
+            x = self.backbone(x)
+            
+            # Project to hidden dimension (B, hidden_dim, H/32, W/32)
+            x = self.proj(x)
+            
+            # Check if position embeddings match feature map size
+            _, _, h, w = x.shape
+            
+            # For ResNet backbone, pos_embed is guaranteed to exist and need to be added
+            # For DINO ViT backbone, we don't use pos_embed at this stage
+            if self.pos_embed is not None:
+                if (h, w) != (self.pos_embed.shape[2], self.pos_embed.shape[3]):
+                    # Resize position embeddings to match feature map size
+                    pos_embed = torch.nn.functional.interpolate(
+                        self.pos_embed, size=(h, w), mode='bicubic', align_corners=False
+                    )
+                else:
+                    pos_embed = self.pos_embed
+                
+                # Add position embeddings
+                x = x + pos_embed
+            
+            # Reshape for transformer: (B, hidden_dim, H, W) -> (B, hidden_dim, H*W) -> (H*W, B, hidden_dim)
+            batch_size, dim, h, w = x.shape
+            x = x.flatten(2).permute(2, 0, 1)
+            
+            # Pass through transformer
+            x = self.transformer(x)
+            
+            # Reshape back: (H*W, B, hidden_dim) -> (B, H*W, hidden_dim)
+            x = x.permute(1, 0, 2)
         
         return x
 
@@ -362,5 +418,11 @@ def build_model(config):
     Returns:
         TransVG model instance
     """
+    # Set default vision backbone if not specified
+    if not hasattr(config, 'vision_backbone'):
+        config.vision_backbone = 'resnet50'
+        
+    print(f"Building TransVG model with {config.vision_backbone} backbone")
+    
     model = TransVG(config)
     return model 
