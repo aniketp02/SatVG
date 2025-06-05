@@ -42,43 +42,50 @@ def box_xyxy_to_cxcywh(x):
 
 def generalized_box_iou(boxes1, boxes2):
     """
-    Compute Generalized IoU (GIoU) between boxes
+    Compute the generalized IoU between two sets of boxes.
     
     Args:
-        boxes1: tensor of shape (N, 4) with [x1, y1, x2, y2] format
-        boxes2: tensor of shape (N, 4) with [x1, y1, x2, y2] format
+        boxes1: Tensor of shape (B, 4) in [x1, y1, x2, y2] format
+        boxes2: Tensor of shape (B, 4) in [x1, y1, x2, y2] format
         
     Returns:
-        giou: tensor of shape (N,) with GIoU values
+        giou: Tensor of shape (B,) containing the generalized IoU for each pair of boxes
     """
-    # Convert to [x1, y1, x2, y2] format if needed
-    assert boxes1.shape[-1] == 4 and boxes2.shape[-1] == 4
+    # Get coordinates
+    x1, y1, x2, y2 = boxes1.unbind(-1)
+    x1g, y1g, x2g, y2g = boxes2.unbind(-1)
     
-    # Get area of boxes
-    area1 = (boxes1[:, 2] - boxes1[:, 0]) * (boxes1[:, 3] - boxes1[:, 1])
-    area2 = (boxes2[:, 2] - boxes2[:, 0]) * (boxes2[:, 3] - boxes2[:, 1])
+    # Calculate areas
+    area1 = (x2 - x1) * (y2 - y1)
+    area2 = (x2g - x1g) * (y2g - y1g)
     
-    # Get coordinates of intersection
-    lt = torch.max(boxes1[:, :2], boxes2[:, :2])  # [N, 2]
-    rb = torch.min(boxes1[:, 2:], boxes2[:, 2:])  # [N, 2]
+    # Calculate intersection
+    xmin = torch.max(x1, x1g)
+    ymin = torch.max(y1, y1g)
+    xmax = torch.min(x2, x2g)
+    ymax = torch.min(y2, y2g)
     
-    # Calculate intersection area
-    wh = (rb - lt).clamp(min=0)  # [N, 2]
-    inter = wh[:, 0] * wh[:, 1]  # [N]
+    # Ensure intersection is valid (xmax > xmin, ymax > ymin)
+    w = (xmax - xmin).clamp(min=0)
+    h = (ymax - ymin).clamp(min=0)
+    inter = w * h
     
-    # Calculate union area
+    # Calculate union
     union = area1 + area2 - inter
     
     # Calculate IoU
     iou = inter / union
     
-    # Calculate coordinates of enclosing box
-    lt_c = torch.min(boxes1[:, :2], boxes2[:, :2])
-    rb_c = torch.max(boxes1[:, 2:], boxes2[:, 2:])
+    # Calculate enclosing box
+    xmin_c = torch.min(x1, x1g)
+    ymin_c = torch.min(y1, y1g)
+    xmax_c = torch.max(x2, x2g)
+    ymax_c = torch.max(y2, y2g)
     
     # Calculate area of enclosing box
-    wh_c = (rb_c - lt_c).clamp(min=0)
-    area_c = wh_c[:, 0] * wh_c[:, 1]
+    w_c = xmax_c - xmin_c
+    h_c = ymax_c - ymin_c
+    area_c = w_c * h_c
     
     # Calculate GIoU
     giou = iou - (area_c - union) / area_c
@@ -86,15 +93,47 @@ def generalized_box_iou(boxes1, boxes2):
     return giou
 
 
+class FocalLoss(nn.Module):
+    """
+    Focal Loss for imbalanced classification
+    Helps focus on hard examples
+    """
+    def __init__(self, alpha=0.25, gamma=2.0, reduction='mean'):
+        super().__init__()
+        self.alpha = alpha
+        self.gamma = gamma
+        self.reduction = reduction
+    
+    def forward(self, inputs, targets):
+        # Binary focal loss for bounding box confidence
+        bce_loss = F.binary_cross_entropy_with_logits(inputs, targets, reduction='none')
+        pt = torch.exp(-bce_loss)  # Probability of the correct class
+        focal_loss = self.alpha * (1 - pt) ** self.gamma * bce_loss
+        
+        if self.reduction == 'mean':
+            return focal_loss.mean()
+        elif self.reduction == 'sum':
+            return focal_loss.sum()
+        else:
+            return focal_loss
+
+
 class TransVGLoss(nn.Module):
     """
     Loss function for TransVG
-    Combines L1 loss and GIoU loss for bounding box regression
+    Combines L1 loss, GIoU loss, and optionally center prediction loss and focal loss
     """
     def __init__(self, config):
         super().__init__()
-        self.l1_weight = config.l1_weight
-        self.giou_weight = config.giou_weight
+        self.l1_weight = getattr(config, 'l1_weight', 5.0)
+        self.giou_weight = getattr(config, 'giou_weight', 2.0)
+        self.center_weight = getattr(config, 'center_weight', 1.0)
+        self.use_focal_loss = getattr(config, 'use_focal_loss', False)
+        self.use_center_loss = getattr(config, 'use_center_loss', False)
+        
+        # Create focal loss if needed
+        if self.use_focal_loss:
+            self.focal_loss = FocalLoss(alpha=0.25, gamma=2.0)
     
     def forward(self, pred_boxes, target_boxes):
         """
@@ -107,7 +146,6 @@ class TransVGLoss(nn.Module):
             loss_dict: Dictionary with individual loss terms
         """
         # Both pred_boxes and target_boxes are already in [xmin, ymin, xmax, ymax] format
-        # No need for conversion
         
         # Calculate L1 loss
         l1_loss = F.l1_loss(pred_boxes, target_boxes, reduction='none')
@@ -117,8 +155,26 @@ class TransVGLoss(nn.Module):
         giou = generalized_box_iou(pred_boxes, target_boxes)
         giou_loss = 1 - giou.mean()
         
+        # Calculate center point loss if enabled
+        center_loss = torch.tensor(0.0, device=pred_boxes.device)
+        if self.use_center_loss:
+            # Convert to center format for center loss
+            pred_cxcywh = box_xyxy_to_cxcywh(pred_boxes)
+            target_cxcywh = box_xyxy_to_cxcywh(target_boxes)
+            
+            # Only use center coordinates (cx, cy)
+            pred_center = pred_cxcywh[:, :2]
+            target_center = target_cxcywh[:, :2]
+            
+            # Center prediction loss (strong weight on center prediction)
+            center_loss = F.mse_loss(pred_center, target_center)
+        
         # Combine losses
         loss = self.l1_weight * l1_loss + self.giou_weight * giou_loss
+        
+        # Add center loss if enabled
+        if self.use_center_loss:
+            loss += self.center_weight * center_loss
         
         # Create loss dictionary for logging
         loss_dict = {
@@ -126,5 +182,8 @@ class TransVGLoss(nn.Module):
             'giou_loss': giou_loss.item(),
             'total_loss': loss.item()
         }
+        
+        if self.use_center_loss:
+            loss_dict['center_loss'] = center_loss.item()
         
         return loss, loss_dict 

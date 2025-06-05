@@ -29,4 +29,28 @@ class DinoVitConfig(ModelConfig):
         self.lr = 5e-5  # Lower learning rate due to pretrained backbone
         
         # Output directory
-        self.output_dir = 'output/dino_vit' 
+        self.output_dir = 'output/dino_vit'
+        
+        # Enhanced loss functions
+        self.l1_weight = 5.0
+        self.giou_weight = 2.0
+        self.center_weight = 1.0
+        self.use_center_loss = True  # Enable center prediction loss
+        self.use_focal_loss = True   # Enable focal loss
+        
+        # Data augmentation settings
+        self.use_augmentation = True
+        self.aug_scale = True      # Random scaling
+        self.aug_crop = True       # Random cropping
+        self.aug_translate = True  # Random translation
+        self.aug_color = True      # Color jitter
+        self.aug_blur = False      # Gaussian blur (disabled by default)
+        self.aug_erase = False     # Random erasing (disabled by default)
+        
+        # Augmentation intensity (light)
+        self.aug_scale_factor = 0.1    # Scale within 10% of original size
+        self.aug_brightness = 0.1      # Brightness adjustment
+        self.aug_contrast = 0.1        # Contrast adjustment
+        self.aug_saturation = 0.1      # Saturation adjustment
+        self.aug_hue = 0.05            # Hue adjustment
+        self.aug_translate_percent = 0.05  # Translation percentage 

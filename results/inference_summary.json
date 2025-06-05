@@ -1,0 +1,12 @@
+{
+  "experiment_info": {
+    "model": "TransVG with DINO ViT backbone",
+    "checkpoint_path": "/home/pokle/Trans-VG/visual_grounding/checkpoints/all_data_dino_improved_epoch54.pth",
+    "checkpoint_epoch": 54,
+    "checkpoint_metrics": {
+      "Acc@0.25": 0.23842126459927507,
+      "Acc@0.5": 0.0896093435360451,
+      "Acc@0.75": 0.011478050745066451,
+      "mIoU": 0.13949886752986004,
+      "medianIoU": 0.014949489695463768,
+      "mae_x1": 

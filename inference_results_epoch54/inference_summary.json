@@ -1,0 +1,61 @@
+{
+  "experiment_info": {
+    "model": "TransVG with DINO ViT backbone",
+    "checkpoint_path": "/home/pokle/Trans-VG/visual_grounding/checkpoints/all_data_dino_improved_epoch54.pth",
+    "checkpoint_epoch": 54,
+    "checkpoint_metrics": {
+      "Acc@0.25": 0.23842126459927507,
+      "Acc@0.5": 0.0896093435360451,
+      "Acc@0.75": 0.011478050745066451,
+      "mIoU": 0.13949886752986004,
+      "medianIoU": 0.014949489695463768,
+      "mae_x1": 118.18961334228516,
+      "mae_y1": 122.98985290527344,
+      "mae_x2": 118.8219985961914,
+      "mae_y2": 124.54466247558594,
+      "center_x_error": 107.0033187866211,
+      "center_y_error": 112.15055084228516,
+      "width_error": 2.13460373878479,
+      "height_error": 1.9641069173812866,
+      "loss": 5.187459470761961
+    },
+    "inference_date": "2025-06-05T04:54:15.171960",
+    "num_samples_evaluated": 50
+  },
+  "model_config": {
+    "image_size": 384,
+    "hidden_dim": 256,
+    "vision_backbone": "dino_vit",
+    "use_center_loss": true,
+    "use_focal_loss": true,
+    "use_augmentation": false
+  },
+  "performance_metrics": {
+    "Acc@0.25": 0.38,
+    "Acc@0.5": 0.18,
+    "Acc@0.75": 0.04,
+    "mIoU": 0.23313113048170428,
+    "medianIoU": 0.1242403370503899,
+    "mae_x1": 83.44332885742188,
+    "mae_y1": 90.45629119873047,
+    "mae_x2": 94.57899475097656,
+    "mae_y2": 83.25064086914062,
+    "center_x_error": 74.86512756347656,
+    "center_y_error": 73.41584777832031,
+    "width_error": 1.2735623121261597,
+    "height_error": 0.8739160299301147
+  },
+  "iou_statistics": {
+    "mean": 0.23313113154843448,
+    "median": 0.12424033880233765,
+    "std": 0.2520750189428874,
+    "min": 0.0,
+    "max": 0.8822883367538452
+  },
+  "sample_breakdown": {
+    "excellent_ious_0.75+": 2,
+    "good_ious_0.5_to_0.75": 7,
+    "moderate_ious_0.25_to_0.5": 10,
+    "poor_ious_below_0.25": 31
+  }
+}

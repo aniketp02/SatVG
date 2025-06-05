@@ -1,0 +1,25 @@
+TransVG Model Inference Summary Report
+==================================================
+
+Model Information:
+  Architecture: TransVG with DINO ViT backbone
+  Checkpoint: all_data_dino_improved_epoch54.pth
+  Training Epoch: 54
+  Image Size: 384x384
+  Inference Date: 2025-06-05T04:54:15.171960
+
+Evaluation Results (50 samples):
+  Mean IoU: 0.2331 ± 0.2521
+  Median IoU: 0.1242
+  IoU Range: [0.0000, 0.8823]
+
+Accuracy at IoU Thresholds:
+  Acc@0.25: 0.3800 (38.0%)
+  Acc@0.5: 0.1800 (18.0%)
+  Acc@0.75: 0.0400 (4.0%)
+
+Performance Breakdown:
+  Excellent (IoU ≥ 0.75): 2 (4.0%)
+  Good (0.5 ≤ IoU < 0.75): 7 (14.0%)
+  Moderate (0.25 ≤ IoU < 0.5): 10 (20.0%)
+  Poor (IoU < 0.25): 31 (62.0%)

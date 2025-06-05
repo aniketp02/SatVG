@@ -1,0 +1,244 @@
+Visual Grounding for Satellite Images
+Dual Degree Project Stage II
+
+Prof. Biplab Banerjee
+
+Aniket Pokle (20D070011)
+
+Contents
+Introduction to Visual Grounding
+Dataset Overview
+Previous Approaches 
+Single Stage
+Two stage
+Limitations
+Proposed Single stage approach
+Diagram of the Model
+Visual Encoder
+Linguistic Encoder
+Cross-attention mechanism
+Bounding Box prediction
+Training Process and Losses
+Loss Graphs
+Baseline Results, Proposed approach, Table for IoU data and Recall
+Results and Metrics
+Future Work
+Fine-Tuning Pre-trained models
+Lightweight adaptation
+Enhanced Multi-Modal attention
+Conclusion
+contributions
+Challenges faced
+Future work and improvements
+
+Introduction
+Visual Grounding: The task of localizing a specific object or region in an image based on a natural language description.
+Applications
+
+Satellite Image Analysis
+Robotics and Autonomous Systems
+Human-Computer Interaction
+Image Retrieval and Search
+Challenges
+
+Complex and Cluttered Scenes
+Ambiguous Language Descriptions
+Domain-Specific Knowledge
+Scalability and Efficiency
+
+Single-stage vs. Two-stage Approaches
+Two-stage approaches:
+First generate a set of sparse region proposals and then exploit region-expression matching to find the best one
+Either binary classification loss or maximum-margin ranking
+High accuracy but computationally expensive
+One-stage approaches: 
+Perform visual-linguistic fusion at intermediate layers of an object detector and output the box with maximal score over pre-defined dense anchors
+Linguistic context is densely fused with the visual features, bounding box prediction in a sliding-window manner
+Faster and Simpler architecture, with potentially lower accuracy
+
+Transformer-based Approaches
+TransVG
+Reformulate the visual grounding as a direct coordinates regression problem and avoid masking predictions out of a set of candidates, outputs a 4-dim coordinates to ground the object
+Separate encoding for video and linguistic features, then append a multi-modal learnable token [REG] for Visual-Linguistic Transformer
+The appended token is leveraged to directly predict the 4 dim coordinates of the referred object
+Visual Branch: ResNet is used as the convolutional backbone network, and initialized with the encoder of DETR model  with 6 transformer encoder layers, with 8 heads in multi-head self-attention
+Linguistic Branch: BERT is used to generate the features and a similar transformer structure as the visual branch
+Visual-Linguistic Fusion Module: The visual and linguistic tokens are concatenated and appended with learnable token 
+
+Experimental setup, loss, datasets, results
+ReferItGame: 20k images with each image having few regions with corresponding referring expressions (54k)
+Flickr30K: 31k images with 427k referred entities
+RefCOCO: 20k images with 50k referred objects.
+Smooth L1 loss, with normalized coordinates
+IoU Loss
+
+Visual Grounding with Transformers
+Approach is to learn semantic-discriminative visual features under the guidance of the textual descriptions without harming their location ability - reformulates visual grounding as the problem of object bounding box coordinates regression conditioned on the query sentence.
+Basic Visual and Textual Encoders: ResNet to extract image features and RNN based soft-parser to extract textual tokens (bi-directional LSTM is applied to encode the context for each word)
+Grounding Encoder: 
+Textual branch with self-attention
+Visual Branch with Text-guided Self-attention
+Grounding Decoder: Modified textual tokens serve as the grounding queries to decode the text-guided visual features
+Prediction Head: Used for bounding box coordinate regression
+
+
+Limitations of Existing Methods
+Limited performance on complex, cluttered scenes
+ Struggle with domain-specific terminology
+ Computationally intensive for high-resolution images
+ Lack of focus on satellite imagery domain
+ Difficulty in handling multi-object relationships
+ Limited interpretability of decisions
+ Challenges in scaling to large datasets
+
+
+Dataset Overview
+Dataset
+Images
+Referred Entities
+Domain
+ReferItGame
+20,000
+54,000
+General
+Flickr30K
+31,000
+427,000
+General
+RefCOCO
+20,000
+50,000
+General
+RSVG
+10,000
+30,000
+Satellite
+RSVG dataset focuses on diverse geographical high-resolution satellite images with domain specific language description
+
+Sample Images for RSVG Dataset
+
+Proposed Single-stage approach
+
+Key Components:
+ResNet for Visual Encoding
+BERT for Linguistic Encoding
+Cross-Modal Attention Mechanism
+Bounding Box Prediction Module
+Innovations:
+Adapted ResNet for high-resolution satellite imagery
+Domain-specific pre-training on satellite image captions
+Multi-scale feature fusion for improved spatial understanding
+Attention-guided bounding box refinement
+
+Model Architecture
+
+Training and Loss
+Pipeline
+Data preprocessing and augmentation
+Model Initialization
+Iterative training with multi-task loss
+Validation and early stopping
+Loss Functions
+IoU Loss
+Smooth L1 Loss for bounding box regression
+
+Training and Validation Curves
+
+Results and Metrics
+Model
+Accuracy
+IoU
+TransVG (Natural)
+71.85%
+0.621
+TransVG (Satellite)
+33%
+0.235
+
+Future work
+Replace ResNet with Vision Transformer (ViT)
+Fine-tune both the Visual and Linguistic encoders on satellite data
+Enhance multi-modal attention mechanisms
+Increase dataset size and diversity
+
+
+References
+https://github.com/djiajunustc/TransVG
+https://github.com/ZhanYang-nwpu/RSVG-pytorch
+https://paperswithcode.com/paper/towards-vision-language-geo-foundation-model
+https://paperswithcode.com/paper/skyeyegpt-unifying-remote-sensing-vision
+https://paperswithcode.com/paper/earthmarker-a-visual-prompt-learning
+https://dl.acm.org/doi/abs/10.1145/3503161.3548316
+https://arxiv.org/pdf/1608.00272
+https://arxiv.org/abs/1505.04870
+https://aclanthology.org/D14-1086/
+https://arxiv.org/abs/2104.08541
+
+
+
+
+Dataset
+Dior-RSVG + RSVG
+Train : 32k images
+Test: 8K
+Val: 5K
+Class distribution (median box size 4.5%), small object localization challenges, scale variation handling (0.02% to 38.8% of the image),
+Custom Data Loader
+Preprocessed dataset to create pickle files of the for [image_name, bbox, text_description]
+Normalized coordinate system for all combined datasets
+Data augmentation and transformations
+Plots, bbox distribution anomalies, query-region alignment
+
+Backbone model experiments
+ResNet50
+Img_size: 224x224
+Acc: 67.09%
+Vit
+Img_size: 224x224
+Acc: 67.56%
+
+
+Experiments
+Baseline (satellite domain)
+Resnet50 backbone w/ Bert-base
+Img_size 224x224
+Results: 5.32 mIoU, 6.24% Acc@0.25
+SatMAE experiment
+Satellite specific masked autoencoder w/ Bert-base
+Fusion Module: 6 layers, 8 heads
+10.08% mIoU, 9.61% Acc@0.25
+
+Technical Improvements to the SatVG architecture
+Increased attention heads from 8 to 12
+Added residual connections
+Added layer normalization
+Enhanced position embeddings
+Insights
+Complex architecture
+Comparable output to simpler architecture
+
+Experiments
+Frozen Backbone experiment
+Resnet50 (pretrained)
+Img_size: 224x224
+Results: 19.47% mIoU, 33.99 Acc@0.25
+Unfreeze backbones (worst performance)Finally partially frozen works best
+ViT Dino Backbone experiment
+img_size : 384x384, Cross attention layers: 6
+Results: 34.21% Acc@0.25
+Used cross attention vision encoder with linguistic features as  conditions
+Patch images as input instead of whole image
+
+
+Experiments
+Loss experiments
+Center Loss added to L1 and GIoU
+Results: Acc@0.25 25.41%, 15% mIoU
+Show dataset challenges
+Plots of loss graphs
+Loss curves
+Inferences after each experiment (good n bad ones)
+Numerical and Visual representation of results
+Gradio Interface
+
+TransVG Model architecture

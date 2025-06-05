@@ -17,7 +17,7 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 from models.transvg import build_model
 from models.losses import box_cxcywh_to_xyxy
-from temp.dataloader import build_dataloaders
+from models.custom_dataloader import build_dataloaders
 from utils.logger import get_logger
 from utils.metrics import calculate_metrics
 from configs.model_config import ModelConfig
@@ -228,7 +228,7 @@ def visualize_prediction(img, text, pred_box, target_box, image_id, output_path,
     plt.close()
 
 
-def evaluate(model, data_loader, device, output_dir, num_samples=5):
+def evaluate(model, data_loader, device, output_dir, num_samples=5, batch_size=32):
     """
     Evaluate model and visualize predictions
     
@@ -261,46 +261,50 @@ def evaluate(model, data_loader, device, output_dir, num_samples=5):
             img = batch['img'].to(device)
             text_tokens = batch['text_tokens'].to(device)
             text_mask = batch['text_mask'].to(device)
-            target = batch['target'].to(device)
-            original_bbox = batch['original_bbox'].to(device)
+            target = batch['target'].to(device)  # Normalized [0,1]
+            original_bbox = batch['original_bbox'].to(device)  # Original pixel coordinates
+            orig_img_size = batch['orig_img_size'].to(device)  # Original image dimensions
             
             # Get raw query text
             query_text = batch['text'] if 'text' in batch else batch.get('query', ["Unknown query"] * len(img))
+            image_names = batch['image_name'] if 'image_name' in batch else batch.get('image_id', [f"img_{j}" for j in range(len(img))])
             
-            # Forward pass
+            # Forward pass - model outputs normalized coordinates [0,1]
             pred_boxes = model(img, text_tokens, text_mask)
             
-            # Save the original predictions in [cx, cy, w, h] format
-            pred_boxes_cxcywh = pred_boxes.clone()
-            
-            # Convert normalized [cx, cy, w, h] to [x1, y1, x2, y2] for metric calculation
-            pred_boxes_xyxy = box_cxcywh_to_xyxy(pred_boxes)
-            
-            # Scale to original image size (224 pixels in this case)
-            pred_boxes_xyxy = pred_boxes_xyxy * 224
+            # Scale normalized predictions to pixel coordinates for original image size
+            batch_size = img.shape[0]
+            pred_boxes_scaled = torch.zeros_like(pred_boxes)
+            for j in range(batch_size):
+                img_w, img_h = orig_img_size[j]
+                pred_boxes_scaled[j, 0] = pred_boxes[j, 0] * img_w  # xmin
+                pred_boxes_scaled[j, 1] = pred_boxes[j, 1] * img_h  # ymin
+                pred_boxes_scaled[j, 2] = pred_boxes[j, 2] * img_w  # xmax
+                pred_boxes_scaled[j, 3] = pred_boxes[j, 3] * img_h  # ymax
             
             # Collect predictions and targets
-            all_pred_boxes.append(pred_boxes_xyxy.cpu())
+            all_pred_boxes.append(pred_boxes_scaled.cpu())
             all_target_boxes.append(original_bbox.cpu())
             
             # Collect samples for visualization
             if len(vis_samples) < num_samples:
-                # Get number of samples we can add from this batch
-                samples_to_add = min(num_samples - len(vis_samples), len(img))
-                
+                samples_to_add = min(num_samples - len(vis_samples), batch_size)
                 for j in range(samples_to_add):
                     vis_samples.append({
                         'img': img[j],
-                        'pred_box': pred_boxes_xyxy[j],
+                        'pred_box': pred_boxes_scaled[j],
                         'target_box': original_bbox[j],
-                        'image_id': batch['image_id'][j],
-                        'text': query_text[j] if isinstance(query_text, list) else query_text,
-                        'pred_box_cxcywh': pred_boxes_cxcywh[j]
+                        'image_id': image_names[j],
+                        'text': query_text[j] if isinstance(query_text, list) else query_text
                     })
     
     # Concatenate all predictions and targets
     all_pred_boxes = torch.cat(all_pred_boxes, dim=0)
     all_target_boxes = torch.cat(all_target_boxes, dim=0)
+    
+    # Debug print to verify prediction and target boxes
+    print("First few prediction boxes:", all_pred_boxes[:5].tolist())
+    print("First few target boxes:", all_target_boxes[:5].tolist())
     
     # Calculate metrics
     metrics = calculate_metrics(all_pred_boxes, all_target_boxes)
@@ -320,8 +324,7 @@ def evaluate(model, data_loader, device, output_dir, num_samples=5):
             sample['pred_box'],
             sample['target_box'],
             sample['image_id'],
-            output_path,
-            sample['pred_box_cxcywh']
+            output_path
         )
     
     return metrics
@@ -345,7 +348,7 @@ def main():
     
     # Build data loaders
     logger.info("Building data loader...")
-    dataloaders = build_dataloaders(config, include_text=args.include_text)
+    dataloaders = build_dataloaders(config)
     data_loader = dataloaders[args.split]
     logger.info(f"{args.split.capitalize()} dataset size: {len(data_loader.dataset)}")
     
@@ -361,7 +364,7 @@ def main():
     
     # Evaluate model
     logger.info(f"Evaluating model on {args.split} split...")
-    metrics = evaluate(model, data_loader, device, args.output_dir, args.num_samples)
+    metrics = evaluate(model, data_loader, device, args.output_dir, args.num_samples, args.batch_size)
     
     # Log metrics
     logger.log_metrics(metrics, split=args.split)

@@ -27,7 +27,7 @@ python train.py \
   --log_name $LOG_NAME \
   --device $DEVICE \
   --partial_freeze_vision \
-  --batch_size 32 \
+  --batch_size 8 \
   --lr 1e-3 \
   --epochs 200
 

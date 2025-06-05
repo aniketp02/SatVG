@@ -1,0 +1,94 @@
+{
+  "model_info": {
+    "checkpoint": "/home/pokle/Trans-VG/visual_grounding/checkpoints/all_data_dino_improved_epoch54.pth",
+    "epoch": 54,
+    "metrics": {
+      "Acc@0.25": 0.23842126459927507,
+      "Acc@0.5": 0.0896093435360451,
+      "Acc@0.75": 0.011478050745066451,
+      "mIoU": 0.13949886752986004,
+      "medianIoU": 0.014949489695463768,
+      "mae_x1": 118.18961334228516,
+      "mae_y1": 122.98985290527344,
+      "mae_x2": 118.8219985961914,
+      "mae_y2": 124.54466247558594,
+      "center_x_error": 107.0033187866211,
+      "center_y_error": 112.15055084228516,
+      "width_error": 2.13460373878479,
+      "height_error": 1.9641069173812866,
+      "loss": 5.187459470761961
+    }
+  },
+  "visualizations": [
+    {
+      "sample_id": 1,
+      "image_name": "00001.jpg",
+      "text_query": "A green and brown golf field",
+      "iou_score": 0.6416544914245605,
+      "output_file": "attention_sample_01_A_green_and_brown_golf_field_iou_0.642.png"
+    },
+    {
+      "sample_id": 2,
+      "image_name": "00082.jpg",
+      "text_query": "The tennis court is on the far left of all tennis courts",
+      "iou_score": 0.0,
+      "output_file": "attention_sample_02_The_tennis_court_is_on_the_far_left_of_all_tennis__iou_0.000.png"
+    },
+    {
+      "sample_id": 3,
+      "image_name": "00117.jpg",
+      "text_query": "A blue and gray small train station",
+      "iou_score": 0.4515312612056732,
+      "output_file": "attention_sample_03_A_blue_and_gray_small_train_station_iou_0.452.png"
+    },
+    {
+      "sample_id": 4,
+      "image_name": "00160.jpg",
+      "text_query": "The small ship",
+      "iou_score": 0.0,
+      "output_file": "attention_sample_04_The_small_ship_iou_0.000.png"
+    },
+    {
+      "sample_id": 5,
+      "image_name": "00224.jpg",
+      "text_query": "The vehicle on the top",
+      "iou_score": 0.016063978895545006,
+      "output_file": "attention_sample_05_The_vehicle_on_the_top_iou_0.016.png"
+    },
+    {
+      "sample_id": 6,
+      "image_name": "00262.jpg",
+      "text_query": "A white storage tank",
+      "iou_score": 0.03038152866065502,
+      "output_file": "attention_sample_06_A_white_storage_tank_iou_0.030.png"
+    },
+    {
+      "sample_id": 7,
+      "image_name": "00377.jpg",
+      "text_query": "A ground track field is in the white stadium in the middle",
+      "iou_score": 0.26532700657844543,
+      "output_file": "attention_sample_07_A_ground_track_field_is_in_the_white_stadium_in_th_iou_0.265.png"
+    },
+    {
+      "sample_id": 8,
+      "image_name": "00469.jpg",
+      "text_query": "A blue and gray long train station in the middle",
+      "iou_score": 0.13239790499210358,
+      "output_file": "attention_sample_08_A_blue_and_gray_long_train_station_in_the_middle_iou_0.132.png"
+    },
+    {
+      "sample_id": 9,
+      "image_name": "00534.jpg",
+      "text_query": "The small dam",
+      "iou_score": 0.0,
+      "output_file": "attention_sample_09_The_small_dam_iou_0.000.png"
+    },
+    {
+      "sample_id": 10,
+      "image_name": "00570.jpg",
+      "text_query": "The vehicle at the bottom",
+      "iou_score": 0.0,
+      "output_file": "attention_sample_10_The_vehicle_at_the_bottom_iou_0.000.png"
+    }
+  ]
+}

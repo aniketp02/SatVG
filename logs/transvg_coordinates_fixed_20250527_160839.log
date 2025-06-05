@@ -1,0 +1,34 @@
+2025-05-27 16:08:41,531 - transvg_coordinates_fixed_20250527_160839 - INFO - Initialized logger: transvg_coordinates_fixed_20250527_160839
+2025-05-27 16:08:41,531 - transvg_coordinates_fixed_20250527_160839 - INFO - Configuration: {
+  "data_root": "/home/pokle/Trans-VG/visual_grounding/rsvg_dataset",
+  "image_size": 640,
+  "max_text_len": 40,
+  "hidden_dim": 256,
+  "bert_model": "bert-base-uncased",
+  "dropout": 0.1,
+  "num_heads": 8,
+  "num_encoder_layers": 6,
+  "cross_layers": 6,
+  "dim_feedforward": 2048,
+  "mlp_hidden_dim": 256,
+  "vision_backbone": "resnet50",
+  "pretrained": true,
+  "freeze_backbone": false,
+  "partial_freeze_vision": true,
+  "freeze_linguistic": false,
+  "partial_freeze_linguistic": true,
+  "batch_size": 8,
+  "num_workers": 4,
+  "learning_rate": 0.0001,
+  "weight_decay": 0.0001,
+  "num_epochs": 100,
+  "lr": 0.001,
+  "lr_bert": 2e-05,
+  "lr_drop": 70,
+  "gradient_clip_val": 1.0,
+  "output_dir": "output",
+  "epochs": 200
+}
+2025-05-27 16:08:41,532 - transvg_coordinates_fixed_20250527_160839 - INFO - Using device: cuda:1
+2025-05-27 16:08:41,532 - transvg_coordinates_fixed_20250527_160839 - INFO - Using ResNet50 backbone | Visual backbone freeze: False, Linguistic backbone freeze: False (vision: partially)
+2025-05-27 16:08:41,532 - transvg_coordinates_fixed_20250527_160839 - INFO - Building data loaders...

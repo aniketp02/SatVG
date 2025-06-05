@@ -1,4 +1,5 @@
 dior-rsvg/*
 checkpoints/*
+rsvg_dataset/*
 
 **__pycache__**

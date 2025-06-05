@@ -226,8 +226,9 @@ def main():
     logger = get_logger(config, args.log_name)
     
     # Set random seed for reproducibility
-    torch.manual_seed(42)
-    np.random.seed(42)
+    seed = np.random.randint(0, 1000000)
+    torch.manual_seed(seed)
+    np.random.seed(seed)
     
     # Set device
     device = torch.device(args.device if args.device else ("cuda" if torch.cuda.is_available() else "cpu"))

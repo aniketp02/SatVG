@@ -17,7 +17,7 @@ class DiorRsvgDataset(Dataset):
     Dataset for DIOR-RSVG visual grounding
     """
     def __init__(self, data_root, split='train', max_query_len=40, bert_model='bert-base-uncased', 
-                 img_size=224, use_augmentation=False):
+                 img_size=224, use_augmentation=False, config=None):
         """
         Initialize dataset
         
@@ -28,29 +28,106 @@ class DiorRsvgDataset(Dataset):
             bert_model: BERT model to use for tokenization
             img_size: Image size for resizing
             use_augmentation: Whether to use data augmentation
+            config: Configuration object with augmentation settings
         """
         self.data_root = data_root
         self.split = split
         self.max_query_len = max_query_len
         self.img_size = img_size
         self.use_augmentation = use_augmentation
+        self.config = config
         
         # Set paths - match the original dataset structure
         self.img_dir = os.path.join(data_root, 'JPEGImages')
-        self.anno_path = os.path.join(data_root, f'dior-{split}.pth')
+        self.anno_path = os.path.join(data_root, f'{split}-data.pth')
         
         # Load annotations
         self.data = self._load_annotations()
         
-        # Image transformation
-        self.transform = transforms.Compose([
-            transforms.Resize((img_size, img_size)),
-            transforms.ToTensor(),
-            transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-        ])
+        # Create transformations based on split and augmentation settings
+        self._setup_transforms()
         
         # Initialize BERT tokenizer
         self.tokenizer = BertTokenizer.from_pretrained(bert_model, do_lower_case=True)
+    
+    def _setup_transforms(self):
+        """Set up image transformations with optional augmentation"""
+        # Standard transformations for all splits
+        normalize = transforms.Normalize(
+            mean=[0.485, 0.456, 0.406], 
+            std=[0.229, 0.224, 0.225]
+        )
+        
+        if self.split == 'train' and self.use_augmentation and self.config is not None:
+            # Get augmentation parameters from config
+            aug_brightness = getattr(self.config, 'aug_brightness', 0.1)
+            aug_contrast = getattr(self.config, 'aug_contrast', 0.1)
+            aug_saturation = getattr(self.config, 'aug_saturation', 0.1)
+            aug_hue = getattr(self.config, 'aug_hue', 0.05)
+            aug_scale_factor = getattr(self.config, 'aug_scale_factor', 0.1)
+            aug_translate_percent = getattr(self.config, 'aug_translate_percent', 0.05)
+            
+            # Define augmentation parameters
+            scale_range = (1.0 - aug_scale_factor, 1.0 + aug_scale_factor)
+            translate_range = (aug_translate_percent, aug_translate_percent)
+            
+            # Build augmentation pipeline for training
+            transform_list = []
+            
+            # Add scale augmentation if enabled
+            if getattr(self.config, 'aug_scale', False):
+                transform_list.append(
+                    transforms.RandomAffine(degrees=0, scale=scale_range)
+                )
+            
+            # Add translation augmentation if enabled
+            if getattr(self.config, 'aug_translate', False):
+                transform_list.append(
+                    transforms.RandomAffine(degrees=0, translate=translate_range)
+                )
+            
+            # Add color augmentation if enabled
+            if getattr(self.config, 'aug_color', False):
+                transform_list.append(
+                    transforms.ColorJitter(
+                        brightness=aug_brightness,
+                        contrast=aug_contrast,
+                        saturation=aug_saturation,
+                        hue=aug_hue
+                    )
+                )
+            
+            # Add random horizontal flip with 50% probability
+            transform_list.append(transforms.RandomHorizontalFlip(p=0.5))
+            
+            # Add blur augmentation if enabled
+            if getattr(self.config, 'aug_blur', False):
+                transform_list.append(
+                    transforms.GaussianBlur(kernel_size=3, sigma=(0.1, 2.0))
+                )
+            
+            # Add common transforms at the end
+            transform_list.extend([
+                transforms.Resize((self.img_size, self.img_size)),
+                transforms.ToTensor(),
+                normalize
+            ])
+            
+            # Add random erasing if enabled (applied after normalization)
+            if getattr(self.config, 'aug_erase', False):
+                transform_list.append(
+                    transforms.RandomErasing(p=0.3, scale=(0.02, 0.1))
+                )
+            
+            self.transform = transforms.Compose(transform_list)
+            print(f"Using augmented transforms for {self.split}: {transform_list}")
+        else:
+            # Standard transformation for validation/test
+            self.transform = transforms.Compose([
+                transforms.Resize((self.img_size, self.img_size)),
+                transforms.ToTensor(),
+                normalize
+            ])
         
     def _load_annotations(self):
         """Load annotations from pickle file"""
@@ -75,7 +152,9 @@ class DiorRsvgDataset(Dataset):
         item = self.data[idx]
         
         # Extract data from format: [image_id, bbox, sentence]
-        image_name = item[0] + '.jpg'
+        image_name = item[0]
+        if not image_name.endswith('.jpg'):
+            image_name = image_name + '.jpg'
         bbox = item[1]  # Format: [xmin, ymin, xmax, ymax] in original image coordinates
         text = item[2]
         
@@ -181,6 +260,9 @@ def build_dataloaders(config, use_pin_memory=True):
     """
     dataloaders = {}
     
+    # Get augmentation setting from config
+    use_augmentation = getattr(config, 'use_augmentation', False)
+    
     # Build training dataloader
     train_dataset = DiorRsvgDataset(
         data_root=config.data_root,
@@ -188,7 +270,8 @@ def build_dataloaders(config, use_pin_memory=True):
         max_query_len=config.max_text_len,
         bert_model=config.bert_model,
         img_size=config.image_size,
-        use_augmentation=False
+        use_augmentation=use_augmentation,
+        config=config
     )
     
     train_loader = DataLoader(
@@ -208,13 +291,14 @@ def build_dataloaders(config, use_pin_memory=True):
         max_query_len=config.max_text_len,
         bert_model=config.bert_model,
         img_size=config.image_size,
-        use_augmentation=False
+        use_augmentation=False,
+        config=config
     )
     
     val_loader = DataLoader(
         val_dataset, 
         batch_size=config.batch_size,
-        shuffle=False,
+        shuffle=True,
         num_workers=config.num_workers,
         collate_fn=collate_fn,
         pin_memory=use_pin_memory
@@ -228,7 +312,8 @@ def build_dataloaders(config, use_pin_memory=True):
         max_query_len=config.max_text_len,
         bert_model=config.bert_model,
         img_size=config.image_size,
-        use_augmentation=False
+        use_augmentation=False,
+        config=config
     )
     
     test_loader = DataLoader(

@@ -91,91 +91,84 @@ Performance on test set after 5 epochs:
 - mIoU: 0.1947 (+0.1233)
 - medianIoU: 0.1049
 
-## Ongoing Experiments
+### Experiment 3: DINO ViT Backbone with Improved Training
 
-### Experiment 3: ViT DINO Backbone
+**Date**: 2025-05-20 to 2025-05-28
+**Status**: Completed (28 epochs)
 
-**Start Date**: 2025-05-20
-**Current Status**: In progress (Epoch 7/200)
-
-**Description**: Replaced the ResNet50 visual backbone with a Vision Transformer (ViT) DINO model.
-
-**Hypothesis**: DINO pre-training provides better contextualized visual features that should improve grounding performance.
+**Description**: Replaced the ResNet50 visual backbone with a Vision Transformer (ViT) DINO model and implemented several training improvements.
 
 **Implementation Details**:
 1. Integrated DINO ViT as visual backbone
-2. Partially frozen DINO backbone
-3. Partially frozen linguistic backbone
-4. Hidden dimension: 256
-5. Batch size: 16 (reduced from 32 due to memory constraints)
-6. Learning rate: 5e-5, BERT learning rate: 2e-5
-
-**Current Best Performance (Epoch 5/200)**:
-- Acc@0.25: 0.3288
-- Acc@0.5: 0.1193
-- Acc@0.75: 0.0173
-- mIoU: 0.1893
-- medianIoU: 0.0944
-- Loss: 4.3884
+2. Partially frozen DINO backbone and linguistic backbone
+3. Increased image size to 384×384
+4. Increased cross-attention layers to 6
+5. Added center loss and focal loss components
+6. Implemented data augmentation (scale, translate, color jitter)
+7. Batch size: 24 (adjusted from 16 due to memory constraints)
+8. Learning rate: 5e-5, BERT learning rate: 2e-5
 
 **Observations**:
-- Model shows consistent improvement from epochs 1-5
-- Slight performance dip in epoch 6
-- Training loss shows expected fluctuations but overall decreasing trend
-- Performance approaching baseline model with potential for further gains
+- Initial performance improved rapidly (epochs 0-5)
+- Performance peaked around epochs 7-9
+- Training loss continued to decrease (from ~7.6 to ~3.85) over 28 epochs
+- Validation metrics plateaued after epoch 9
+- Component losses showed significant improvements:
+  - L1 loss: ~0.96 → ~0.38-0.42
+  - GIoU loss: ~1.40 → ~0.95-1.03
+  - Center loss: ~0.059 → ~0.012-0.018
 
-**Next Steps**:
-- Continue training to at least 15-20 epochs
-- Monitor validation metrics for stabilization
-- Consider learning rate adjustments if performance plateaus
+**Investigation Findings**:
+- Initial concerns about identical target boxes were investigated
+- Dataset inspection confirmed diverse boxes (32,638 total boxes, 31,318 unique)
+- The identical target box issue in logs was due to always displaying the same validation sample
+- Random seed configuration needed improvement for reproducibility
 
-### Experiment 4: Increased Image Size and Cross-Attention Layers
+**Best Performance (Epoch 8)**:
+- Acc@0.25: 0.2541
+- Acc@0.5: 0.0959 
+- Acc@0.75: 0.0143
+- mIoU: 0.1500
+- medianIoU: 0.0337
+- Center error: ~100 pixels
 
-**Start Date**: 2025-05-20
+**Final Performance (Epoch 27)**:
+- Acc@0.25: 0.2473
+- Acc@0.5: 0.0916
+- Acc@0.75: 0.0127
+- mIoU: 0.1449
+- medianIoU: 0.0204
+- Center error: ~105-110 pixels
+
+**Key Learnings**:
+- DINO ViT backbone shows competitive performance to ResNet50
+- Model learns effectively but reaches a performance ceiling
+- Width/height error decreases faster than center error, suggesting the model learns box sizing better than localization
+- Signs of potential overfitting after extended training (training loss continues to decrease while validation metrics plateau)
+
+## Ongoing Experiments
+
+### Experiment 4: Improved Logging and Seed Configuration
+
+**Start Date**: 2025-05-28
 **Current Status**: In progress
 
-**Description**: Increased input image resolution and number of cross-attention layers to improve feature representation and cross-modal interaction.
+**Description**: Implementing fixes for logging and random seed issues identified in previous experiments.
 
 **Implementation Details**:
-- Image size: 384×384 (increased from 224×224)
-- Cross-attention layers: 6 (increased from 4)
-- Fixed coordinate system following Experiment 2
+1. Fixed validation logging to show diverse examples instead of always the first sample
+2. Implemented proper random seed configuration for reproducibility
+3. Added more comprehensive logging of diverse samples
+4. Enabled shuffling in validation dataloader for more robust evaluation
 
-**Current Performance**:
-- Acc@0.25: 0.3150
-- Acc@0.5: 0.1116
-- Acc@0.75: 0.0130
-- mIoU: 0.1798
-- medianIoU: 0.0853
-- Loss: 4.5501
-
-**Observations**:
-- Higher resolution allows for more detailed feature extraction
-- Model showing promising performance comparable to baseline
-- Increased cross-attention layers provide more effective cross-modal fusion
-- Larger input size increases memory requirements
-
-**Next Steps**:
-- Continue training to assess full potential
-- Compare performance trajectory against the DINO backbone experiment
-- Evaluate if the increased complexity justifies the performance gain
+**Expected Outcomes**:
+- Better assessment of model performance through diverse sample logging
+- More consistent results between training runs
+- More robust evaluation through validation set shuffling
 
 ## Planned Experiments
 
-### Experiment 5: Data Augmentation
-
-**Description**: Implement data augmentation strategies to improve model generalization.
-
-**Hypothesis**: Augmentation will improve model generalization and prevent overfitting, especially for longer training runs.
-
-**Implementation Plan**:
-1. Add color jitter, random flips, and random crops
-2. Ensure bounding box coordinates are properly adjusted for spatial augmentations
-3. Compare performance with and without augmentation
-
-**Expected Outcome**: Slower initial training but better final performance, especially on test set.
-
-### Experiment 6: Learning Rate Schedule Optimization
+### Experiment 5: Learning Rate Schedule Optimization
 
 **Description**: Implement learning rate warmup and cosine decay instead of step decay.
 
@@ -188,21 +181,49 @@ Performance on test set after 5 epochs:
 
 **Expected Outcome**: More stable training and potentially better convergence.
 
+### Experiment 6: Multi-Scale Feature Fusion
+
+**Description**: Enhance the model's feature representation by integrating multi-scale features from the vision backbone.
+
+**Hypothesis**: Multi-scale features will improve localization performance, especially for objects of varying sizes.
+
+**Implementation Plan**:
+1. Extract features from different layers of the DINO ViT backbone
+2. Implement feature pyramid or similar architecture for fusion
+3. Modify cross-attention to work with multi-scale features
+
+**Expected Outcome**: Improved localization accuracy and better performance on small objects.
+
+### Experiment 7: Loss Function Enhancements
+
+**Description**: Optimize the weighting and composition of loss functions.
+
+**Hypothesis**: Better loss function design will guide the model to focus more on reducing center error.
+
+**Implementation Plan**:
+1. Adjust weights between L1, GIoU, and center losses
+2. Implement dynamic loss weighting based on training progress
+3. Experiment with DIoU or CIoU loss variants
+
+**Expected Outcome**: Reduced center error and improved overall accuracy.
+
 ## Improvement Ideas
 
 1. **Architectural Improvements**:
    - Add multi-scale feature fusion from vision backbone
    - Experiment with different normalization strategies
+   - Try alternative cross-attention mechanisms
 
 2. **Training Strategies**:
    - Progressive unfreezing of backbone layers
    - Mixed precision training for faster iterations
    - Gradient accumulation for effectively larger batch sizes
+   - Implement curriculum learning by difficulty
 
 3. **Loss Function Enhancements**:
-   - Center-ness constraint to focus on center accuracy
-   - Dynamic weighting of L1 and GIoU losses
-   - Classification head to predict confidence score
+   - Dynamically adjust center-ness constraint weight during training
+   - Progressive loss weighting that changes during training
+   - Add auxiliary losses to encourage better feature representation
 
 4. **Model Interpretability**:
    - Add attention visualization for cross-modal layers
@@ -212,6 +233,7 @@ Performance on test set after 5 epochs:
 5. **Evaluation Metrics**:
    - Compare with human annotations to assess qualitative performance
    - Add metrics for specific object categories or query types
+   - Implement more frequent validation checks
 
 6. **Inference Optimization**:
    - Model pruning and quantization

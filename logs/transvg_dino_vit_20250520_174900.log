@@ -1,0 +1,194 @@
+2025-05-20 17:49:08,904 - transvg_dino_vit_20250520_174900 - INFO - Initialized logger: transvg_dino_vit_20250520_174900
+2025-05-20 17:49:08,905 - transvg_dino_vit_20250520_174900 - INFO - Configuration: {
+  "data_root": "/home/pokle/Trans-VG/visual_grounding/dior-rsvg",
+  "image_size": 384,
+  "max_text_len": 40,
+  "hidden_dim": 256,
+  "bert_model": "bert-base-uncased",
+  "dropout": 0.1,
+  "num_heads": 8,
+  "num_encoder_layers": 6,
+  "cross_layers": 6,
+  "dim_feedforward": 2048,
+  "mlp_hidden_dim": 256,
+  "vision_backbone": "dino_vit",
+  "pretrained": true,
+  "freeze_backbone": true,
+  "partial_freeze_vision": true,
+  "freeze_linguistic": false,
+  "partial_freeze_linguistic": true,
+  "batch_size": 16,
+  "num_workers": 4,
+  "learning_rate": 0.0001,
+  "weight_decay": 0.0001,
+  "num_epochs": 100,
+  "lr": 5e-05,
+  "lr_bert": 2e-05,
+  "lr_drop": 70,
+  "gradient_clip_val": 1.0,
+  "output_dir": "output/dino_vit",
+  "epochs": 100
+}
+2025-05-20 17:49:08,906 - transvg_dino_vit_20250520_174900 - INFO - Using device: cuda:0
+2025-05-20 17:49:08,906 - transvg_dino_vit_20250520_174900 - INFO - Using DINO ViT backbone | Visual backbone freeze: True, Linguistic backbone freeze: False (vision: partially)
+2025-05-20 17:49:08,906 - transvg_dino_vit_20250520_174900 - INFO - Building data loaders...
+2025-05-20 17:49:10,029 - transvg_dino_vit_20250520_174900 - INFO - Train dataset size: 27133
+2025-05-20 17:49:10,029 - transvg_dino_vit_20250520_174900 - INFO - Val dataset size: 3765
+2025-05-20 17:49:10,029 - transvg_dino_vit_20250520_174900 - INFO - Test dataset size: 7422
+2025-05-20 17:49:10,029 - transvg_dino_vit_20250520_174900 - INFO - Building model...
+2025-05-20 17:49:12,292 - transvg_dino_vit_20250520_174900 - INFO - Starting training...
+2025-05-20 17:49:12,292 - transvg_dino_vit_20250520_174900 - INFO - Epoch 0/100
+2025-05-20 17:49:14,946 - transvg_dino_vit_20250520_174900 - INFO - Epoch 0, Batch 0/1696, Loss: 7.6771
+2025-05-20 17:49:14,946 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 1.0228 | giou_loss: 1.2816 | total_loss: 7.6771
+2025-05-20 17:50:20,885 - transvg_dino_vit_20250520_174900 - INFO - Epoch 0, Batch 50/1696, Loss: 7.0355
+2025-05-20 17:50:20,885 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.9786 | giou_loss: 1.0713 | total_loss: 7.0355
+2025-05-20 17:51:30,110 - transvg_dino_vit_20250520_174900 - INFO - Epoch 0, Batch 100/1696, Loss: 6.1396
+2025-05-20 17:51:30,110 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.7326 | giou_loss: 1.2383 | total_loss: 6.1396
+2025-05-20 17:52:40,518 - transvg_dino_vit_20250520_174900 - INFO - Epoch 0, Batch 150/1696, Loss: 5.2847
+2025-05-20 17:52:40,518 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.6250 | giou_loss: 1.0798 | total_loss: 5.2847
+2025-05-20 17:53:50,206 - transvg_dino_vit_20250520_174900 - INFO - Epoch 0, Batch 200/1696, Loss: 5.8244
+2025-05-20 17:53:50,206 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.6820 | giou_loss: 1.2073 | total_loss: 5.8244
+2025-05-20 17:55:00,362 - transvg_dino_vit_20250520_174900 - INFO - Epoch 0, Batch 250/1696, Loss: 6.1239
+2025-05-20 17:55:00,363 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.7151 | giou_loss: 1.2742 | total_loss: 6.1239
+2025-05-20 17:56:10,319 - transvg_dino_vit_20250520_174900 - INFO - Epoch 0, Batch 300/1696, Loss: 4.5445
+2025-05-20 17:56:10,319 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.5096 | giou_loss: 0.9984 | total_loss: 4.5445
+2025-05-20 17:57:20,461 - transvg_dino_vit_20250520_174900 - INFO - Epoch 0, Batch 350/1696, Loss: 5.8770
+2025-05-20 17:57:20,461 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.6890 | giou_loss: 1.2161 | total_loss: 5.8770
+2025-05-20 17:58:31,125 - transvg_dino_vit_20250520_174900 - INFO - Epoch 0, Batch 400/1696, Loss: 4.3287
+2025-05-20 17:58:31,125 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.5166 | giou_loss: 0.8727 | total_loss: 4.3287
+2025-05-20 17:59:41,499 - transvg_dino_vit_20250520_174900 - INFO - Epoch 0, Batch 450/1696, Loss: 5.2673
+2025-05-20 17:59:41,499 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.6220 | giou_loss: 1.0786 | total_loss: 5.2673
+2025-05-20 18:00:52,085 - transvg_dino_vit_20250520_174900 - INFO - Epoch 0, Batch 500/1696, Loss: 6.1275
+2025-05-20 18:00:52,085 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.7615 | giou_loss: 1.1600 | total_loss: 6.1275
+2025-05-20 18:02:02,120 - transvg_dino_vit_20250520_174900 - INFO - Epoch 0, Batch 550/1696, Loss: 4.6180
+2025-05-20 18:02:02,121 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.4900 | giou_loss: 1.0840 | total_loss: 4.6180
+2025-05-20 18:03:11,966 - transvg_dino_vit_20250520_174900 - INFO - Epoch 0, Batch 600/1696, Loss: 4.9095
+2025-05-20 18:03:11,967 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.5726 | giou_loss: 1.0233 | total_loss: 4.9095
+2025-05-20 18:04:22,112 - transvg_dino_vit_20250520_174900 - INFO - Epoch 0, Batch 650/1696, Loss: 4.9450
+2025-05-20 18:04:22,113 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.5681 | giou_loss: 1.0523 | total_loss: 4.9450
+2025-05-20 18:05:31,840 - transvg_dino_vit_20250520_174900 - INFO - Epoch 0, Batch 700/1696, Loss: 4.7308
+2025-05-20 18:05:31,841 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.5028 | giou_loss: 1.1085 | total_loss: 4.7308
+2025-05-20 18:06:41,539 - transvg_dino_vit_20250520_174900 - INFO - Epoch 0, Batch 750/1696, Loss: 5.4525
+2025-05-20 18:06:41,539 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.6723 | giou_loss: 1.0454 | total_loss: 5.4525
+2025-05-20 18:07:51,315 - transvg_dino_vit_20250520_174900 - INFO - Epoch 0, Batch 800/1696, Loss: 4.6724
+2025-05-20 18:07:51,315 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.5404 | giou_loss: 0.9851 | total_loss: 4.6724
+2025-05-20 18:09:01,281 - transvg_dino_vit_20250520_174900 - INFO - Epoch 0, Batch 850/1696, Loss: 4.6207
+2025-05-20 18:09:01,281 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.5218 | giou_loss: 1.0059 | total_loss: 4.6207
+2025-05-20 18:10:11,417 - transvg_dino_vit_20250520_174900 - INFO - Epoch 0, Batch 900/1696, Loss: 5.5236
+2025-05-20 18:10:11,417 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.6243 | giou_loss: 1.2011 | total_loss: 5.5236
+2025-05-20 18:11:20,962 - transvg_dino_vit_20250520_174900 - INFO - Epoch 0, Batch 950/1696, Loss: 6.3640
+2025-05-20 18:11:20,962 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.8014 | giou_loss: 1.1784 | total_loss: 6.3640
+2025-05-20 18:12:30,243 - transvg_dino_vit_20250520_174900 - INFO - Epoch 0, Batch 1000/1696, Loss: 4.8746
+2025-05-20 18:12:30,243 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.5681 | giou_loss: 1.0172 | total_loss: 4.8746
+2025-05-20 18:13:39,952 - transvg_dino_vit_20250520_174900 - INFO - Epoch 0, Batch 1050/1696, Loss: 4.3059
+2025-05-20 18:13:39,953 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.4704 | giou_loss: 0.9770 | total_loss: 4.3059
+2025-05-20 18:14:49,730 - transvg_dino_vit_20250520_174900 - INFO - Epoch 0, Batch 1100/1696, Loss: 4.3559
+2025-05-20 18:14:49,731 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.4854 | giou_loss: 0.9645 | total_loss: 4.3559
+2025-05-20 18:15:59,097 - transvg_dino_vit_20250520_174900 - INFO - Epoch 0, Batch 1150/1696, Loss: 5.1885
+2025-05-20 18:15:59,097 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.6198 | giou_loss: 1.0447 | total_loss: 5.1885
+2025-05-20 18:17:08,767 - transvg_dino_vit_20250520_174900 - INFO - Epoch 0, Batch 1200/1696, Loss: 4.6891
+2025-05-20 18:17:08,767 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.5470 | giou_loss: 0.9771 | total_loss: 4.6891
+2025-05-20 18:18:18,458 - transvg_dino_vit_20250520_174900 - INFO - Epoch 0, Batch 1250/1696, Loss: 4.3660
+2025-05-20 18:18:18,458 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.4983 | giou_loss: 0.9373 | total_loss: 4.3660
+2025-05-20 18:19:28,452 - transvg_dino_vit_20250520_174900 - INFO - Epoch 0, Batch 1300/1696, Loss: 5.1380
+2025-05-20 18:19:28,452 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.6204 | giou_loss: 1.0180 | total_loss: 5.1380
+2025-05-20 18:20:37,770 - transvg_dino_vit_20250520_174900 - INFO - Epoch 0, Batch 1350/1696, Loss: 4.7317
+2025-05-20 18:20:37,771 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.5284 | giou_loss: 1.0448 | total_loss: 4.7317
+2025-05-20 18:21:47,608 - transvg_dino_vit_20250520_174900 - INFO - Epoch 0, Batch 1400/1696, Loss: 4.8758
+2025-05-20 18:21:47,609 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.5396 | giou_loss: 1.0890 | total_loss: 4.8758
+2025-05-20 18:22:56,869 - transvg_dino_vit_20250520_174900 - INFO - Epoch 0, Batch 1450/1696, Loss: 4.1210
+2025-05-20 18:22:56,869 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.4480 | giou_loss: 0.9405 | total_loss: 4.1210
+2025-05-20 18:24:06,567 - transvg_dino_vit_20250520_174900 - INFO - Epoch 0, Batch 1500/1696, Loss: 4.0979
+2025-05-20 18:24:06,567 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.4426 | giou_loss: 0.9425 | total_loss: 4.0979
+2025-05-20 18:25:15,985 - transvg_dino_vit_20250520_174900 - INFO - Epoch 0, Batch 1550/1696, Loss: 4.7840
+2025-05-20 18:25:15,986 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.5200 | giou_loss: 1.0919 | total_loss: 4.7840
+2025-05-20 18:26:25,498 - transvg_dino_vit_20250520_174900 - INFO - Epoch 0, Batch 1600/1696, Loss: 5.1522
+2025-05-20 18:26:25,499 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.5665 | giou_loss: 1.1598 | total_loss: 5.1522
+2025-05-20 18:27:35,343 - transvg_dino_vit_20250520_174900 - INFO - Epoch 0, Batch 1650/1696, Loss: 4.5635
+2025-05-20 18:27:35,344 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.4884 | giou_loss: 1.0607 | total_loss: 4.5635
+2025-05-20 18:28:38,014 - transvg_dino_vit_20250520_174900 - INFO - Train Epoch 0, Loss: 5.0173
+2025-05-20 18:30:37,338 - transvg_dino_vit_20250520_174900 - INFO - Pred box sample: [48.55570983886719, 89.19225311279297, 185.14024353027344, 223.70237731933594]
+2025-05-20 18:30:37,338 - transvg_dino_vit_20250520_174900 - INFO - Target box sample: [207.0, 198.0, 287.0, 283.0]
+2025-05-20 18:30:37,417 - transvg_dino_vit_20250520_174900 - INFO - Validation Epoch 0, Loss: 4.5970
+2025-05-20 18:30:37,417 - transvg_dino_vit_20250520_174900 - INFO - Val metrics: Acc@0.25: 0.2951 | Acc@0.5: 0.0794 | Acc@0.75: 0.0074 | mIoU: 0.1629 | medianIoU: 0.0740 | mae_x1: 106.7468 | mae_y1: 100.6754 | mae_x2: 103.3049 | mae_y2: 96.1697 | center_x_error: 88.7819 | center_y_error: 81.5505 | width_error: 2.6289 | height_error: 2.3781 | loss: 4.5970
+2025-05-20 18:30:38,394 - transvg_dino_vit_20250520_174900 - INFO - Saved model checkpoint to /home/pokle/Trans-VG/visual_grounding/checkpoints/transvg_dino_vit_20250520_174900_epoch0.pth
+2025-05-20 18:30:38,394 - transvg_dino_vit_20250520_174900 - INFO - New best model! Acc@0.5: 0.0794
+2025-05-20 18:30:38,394 - transvg_dino_vit_20250520_174900 - INFO - Epoch 1/100
+2025-05-20 18:30:40,370 - transvg_dino_vit_20250520_174900 - INFO - Epoch 1, Batch 0/1696, Loss: 4.5765
+2025-05-20 18:30:40,370 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.4781 | giou_loss: 1.0929 | total_loss: 4.5765
+2025-05-20 18:31:51,198 - transvg_dino_vit_20250520_174900 - INFO - Epoch 1, Batch 50/1696, Loss: 4.4670
+2025-05-20 18:31:51,198 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.5113 | giou_loss: 0.9552 | total_loss: 4.4670
+2025-05-20 18:33:02,117 - transvg_dino_vit_20250520_174900 - INFO - Epoch 1, Batch 100/1696, Loss: 5.4168
+2025-05-20 18:33:02,143 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.6260 | giou_loss: 1.1434 | total_loss: 5.4168
+2025-05-20 18:34:12,349 - transvg_dino_vit_20250520_174900 - INFO - Epoch 1, Batch 150/1696, Loss: 4.5464
+2025-05-20 18:34:12,349 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.5075 | giou_loss: 1.0044 | total_loss: 4.5464
+2025-05-20 18:35:23,198 - transvg_dino_vit_20250520_174900 - INFO - Epoch 1, Batch 200/1696, Loss: 4.9342
+2025-05-20 18:35:23,198 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.5440 | giou_loss: 1.1071 | total_loss: 4.9342
+2025-05-20 18:36:33,630 - transvg_dino_vit_20250520_174900 - INFO - Epoch 1, Batch 250/1696, Loss: 4.4501
+2025-05-20 18:36:33,630 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.5297 | giou_loss: 0.9009 | total_loss: 4.4501
+2025-05-20 18:37:43,897 - transvg_dino_vit_20250520_174900 - INFO - Epoch 1, Batch 300/1696, Loss: 5.0500
+2025-05-20 18:37:43,932 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.5834 | giou_loss: 1.0664 | total_loss: 5.0500
+2025-05-20 18:38:54,782 - transvg_dino_vit_20250520_174900 - INFO - Epoch 1, Batch 350/1696, Loss: 4.4794
+2025-05-20 18:38:54,782 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.5058 | giou_loss: 0.9751 | total_loss: 4.4794
+2025-05-20 18:40:05,157 - transvg_dino_vit_20250520_174900 - INFO - Epoch 1, Batch 400/1696, Loss: 4.8874
+2025-05-20 18:40:05,157 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.5454 | giou_loss: 1.0803 | total_loss: 4.8874
+2025-05-20 18:41:16,042 - transvg_dino_vit_20250520_174900 - INFO - Epoch 1, Batch 450/1696, Loss: 3.8769
+2025-05-20 18:41:16,293 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.4087 | giou_loss: 0.9167 | total_loss: 3.8769
+2025-05-20 18:42:27,150 - transvg_dino_vit_20250520_174900 - INFO - Epoch 1, Batch 500/1696, Loss: 5.2002
+2025-05-20 18:42:27,150 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.6092 | giou_loss: 1.0771 | total_loss: 5.2002
+2025-05-20 18:43:37,629 - transvg_dino_vit_20250520_174900 - INFO - Epoch 1, Batch 550/1696, Loss: 4.0072
+2025-05-20 18:43:37,629 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.4537 | giou_loss: 0.8694 | total_loss: 4.0072
+2025-05-20 18:44:47,630 - transvg_dino_vit_20250520_174900 - INFO - Epoch 1, Batch 600/1696, Loss: 5.0003
+2025-05-20 18:44:47,630 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.5938 | giou_loss: 1.0158 | total_loss: 5.0003
+2025-05-20 18:45:58,100 - transvg_dino_vit_20250520_174900 - INFO - Epoch 1, Batch 650/1696, Loss: 4.1084
+2025-05-20 18:45:58,100 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.4346 | giou_loss: 0.9676 | total_loss: 4.1084
+2025-05-20 18:47:08,780 - transvg_dino_vit_20250520_174900 - INFO - Epoch 1, Batch 700/1696, Loss: 5.2167
+2025-05-20 18:47:08,780 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.6317 | giou_loss: 1.0290 | total_loss: 5.2167
+2025-05-20 18:48:19,558 - transvg_dino_vit_20250520_174900 - INFO - Epoch 1, Batch 750/1696, Loss: 4.4451
+2025-05-20 18:48:19,558 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.4749 | giou_loss: 1.0352 | total_loss: 4.4451
+2025-05-20 18:49:30,387 - transvg_dino_vit_20250520_174900 - INFO - Epoch 1, Batch 800/1696, Loss: 3.7313
+2025-05-20 18:49:30,387 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.3908 | giou_loss: 0.8886 | total_loss: 3.7313
+2025-05-20 18:50:41,066 - transvg_dino_vit_20250520_174900 - INFO - Epoch 1, Batch 850/1696, Loss: 3.9359
+2025-05-20 18:50:41,066 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.4313 | giou_loss: 0.8897 | total_loss: 3.9359
+2025-05-20 18:51:51,696 - transvg_dino_vit_20250520_174900 - INFO - Epoch 1, Batch 900/1696, Loss: 4.3386
+2025-05-20 18:51:51,696 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.5304 | giou_loss: 0.8432 | total_loss: 4.3386
+2025-05-20 18:53:02,592 - transvg_dino_vit_20250520_174900 - INFO - Epoch 1, Batch 950/1696, Loss: 5.4432
+2025-05-20 18:53:02,592 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.6669 | giou_loss: 1.0543 | total_loss: 5.4432
+2025-05-20 18:54:13,104 - transvg_dino_vit_20250520_174900 - INFO - Epoch 1, Batch 1000/1696, Loss: 3.8115
+2025-05-20 18:54:13,104 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.4141 | giou_loss: 0.8706 | total_loss: 3.8115
+2025-05-20 18:55:24,158 - transvg_dino_vit_20250520_174900 - INFO - Epoch 1, Batch 1050/1696, Loss: 3.9134
+2025-05-20 18:55:24,158 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.3983 | giou_loss: 0.9609 | total_loss: 3.9134
+2025-05-20 18:56:34,974 - transvg_dino_vit_20250520_174900 - INFO - Epoch 1, Batch 1100/1696, Loss: 5.0210
+2025-05-20 18:56:34,974 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.5954 | giou_loss: 1.0220 | total_loss: 5.0210
+2025-05-20 18:57:45,764 - transvg_dino_vit_20250520_174900 - INFO - Epoch 1, Batch 1150/1696, Loss: 5.3413
+2025-05-20 18:57:45,764 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.6132 | giou_loss: 1.1377 | total_loss: 5.3413
+2025-05-20 18:58:56,129 - transvg_dino_vit_20250520_174900 - INFO - Epoch 1, Batch 1200/1696, Loss: 4.2894
+2025-05-20 18:58:56,129 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.4889 | giou_loss: 0.9225 | total_loss: 4.2894
+2025-05-20 19:00:06,777 - transvg_dino_vit_20250520_174900 - INFO - Epoch 1, Batch 1250/1696, Loss: 4.6539
+2025-05-20 19:00:06,777 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.5195 | giou_loss: 1.0282 | total_loss: 4.6539
+2025-05-20 19:01:17,509 - transvg_dino_vit_20250520_174900 - INFO - Epoch 1, Batch 1300/1696, Loss: 4.4152
+2025-05-20 19:01:17,509 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.4968 | giou_loss: 0.9657 | total_loss: 4.4152
+2025-05-20 19:02:28,107 - transvg_dino_vit_20250520_174900 - INFO - Epoch 1, Batch 1350/1696, Loss: 3.9836
+2025-05-20 19:02:28,107 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.4449 | giou_loss: 0.8795 | total_loss: 3.9836
+2025-05-20 19:03:38,822 - transvg_dino_vit_20250520_174900 - INFO - Epoch 1, Batch 1400/1696, Loss: 4.8362
+2025-05-20 19:03:38,822 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.5205 | giou_loss: 1.1169 | total_loss: 4.8362
+2025-05-20 19:04:49,718 - transvg_dino_vit_20250520_174900 - INFO - Epoch 1, Batch 1450/1696, Loss: 5.0001
+2025-05-20 19:04:49,718 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.5558 | giou_loss: 1.1106 | total_loss: 5.0001
+2025-05-20 19:06:00,268 - transvg_dino_vit_20250520_174900 - INFO - Epoch 1, Batch 1500/1696, Loss: 5.4621
+2025-05-20 19:06:00,268 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.6503 | giou_loss: 1.1053 | total_loss: 5.4621
+2025-05-20 19:07:11,204 - transvg_dino_vit_20250520_174900 - INFO - Epoch 1, Batch 1550/1696, Loss: 4.6562
+2025-05-20 19:07:11,204 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.5212 | giou_loss: 1.0250 | total_loss: 4.6562
+2025-05-20 19:08:21,758 - transvg_dino_vit_20250520_174900 - INFO - Epoch 1, Batch 1600/1696, Loss: 5.5490
+2025-05-20 19:08:21,758 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.6435 | giou_loss: 1.1658 | total_loss: 5.5490
+2025-05-20 19:09:32,478 - transvg_dino_vit_20250520_174900 - INFO - Epoch 1, Batch 1650/1696, Loss: 4.3004
+2025-05-20 19:09:32,478 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.4751 | giou_loss: 0.9624 | total_loss: 4.3004
+2025-05-20 19:10:35,785 - transvg_dino_vit_20250520_174900 - INFO - Train Epoch 1, Loss: 4.5875
+2025-05-20 19:12:36,137 - transvg_dino_vit_20250520_174900 - INFO - Pred box sample: [39.0495719909668, 64.56659698486328, 207.08541870117188, 193.63885498046875]
+2025-05-20 19:12:36,137 - transvg_dino_vit_20250520_174900 - INFO - Target box sample: [207.0, 198.0, 287.0, 283.0]
+2025-05-20 19:12:36,222 - transvg_dino_vit_20250520_174900 - INFO - Validation Epoch 1, Loss: 4.5039
+2025-05-20 19:12:36,222 - transvg_dino_vit_20250520_174900 - INFO - Val metrics: Acc@0.25: 0.3100 | Acc@0.5: 0.1044 | Acc@0.75: 0.0093 | mIoU: 0.1756 | medianIoU: 0.0822 | mae_x1: 100.6417 | mae_y1: 96.4894 | mae_x2: 102.2448 | mae_y2: 97.4452 | center_x_error: 84.9877 | center_y_error: 81.6795 | width_error: 2.7390 | height_error: 2.2407 | loss: 4.5039
+2025-05-20 19:12:37,286 - transvg_dino_vit_20250520_174900 - INFO - Saved model checkpoint to /home/pokle/Trans-VG/visual_grounding/checkpoints/transvg_dino_vit_20250520_174900_epoch1.pth
+2025-05-20 19:12:37,287 - transvg_dino_vit_20250520_174900 - INFO - New best model! Acc@0.5: 0.1044
+2025-05-20 19:12:37,287 - transvg_dino_vit_20250520_174900 - INFO - Epoch 2/100
+2025-05-20 19:12:39,222 - transvg_dino_vit_20250520_174900 - INFO - Epoch 2, Batch 0/1696, Loss: 4.5716
+2025-05-20 19:12:39,222 - transvg_dino_vit_20250520_174900 - INFO - Train metrics: l1_loss: 0.4929 | giou_loss: 1.0535 | total_loss: 4.5716
